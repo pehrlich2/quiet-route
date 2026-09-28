@@ -25,7 +25,10 @@ writes `out/plan.json`.
 3. **Routing**: each day is a capacitated vehicle routing problem solved with OR-Tools.
    Each trailer load is modelled as a "vehicle" that ends at the dump, so the solver
    decides which stops go in which load. Distances are shortest road paths.
-4. **Energy** is computed in the browser from each day's road miles, so battery,
+4. **Recycling modes**: trash only; alternate weeks (trash in week A, recycling in
+   week B, same weekday); or both carts in one visit with a split trailer. The split
+   mode adds a second capacity dimension, so each compartment fills independently.
+5. **Energy** is computed in the browser from each day's road miles, so battery,
    towing and winter settings update instantly without re-solving.
 
 ## Limits

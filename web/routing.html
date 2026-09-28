@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/web/favicon.svg" type="image/svg+xml">
+<title>Quiet Route Planner</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="/web/style.css">
+</head>
+<body>
+<aside id="side">
+  <header>
+    <nav class="mini" aria-label="Site"><a href="index.html">Home</a> · <a href="plan.html">Plan</a> · <a href="hardware.html">Hardware</a> · <a href="software.html">Software</a> · <a href="policies.html">Policies</a> · <a href="regulatory.html">Regulatory</a> · <a href="risks.html">Risks</a></nav>
+    <div class="eyebrow">Quiet Route Hauling</div>
+    <h1>Route planner</h1>
+  </header>
+
+  <section>
+    <h2>Customers</h2>
+    <form id="planForm">
+      <div class="row"><label for="customers">Customers</label><input id="customers" type="number" min="10" max="4000" step="10"></div>
+      <fieldset id="towns"><legend>Towns</legend></fieldset>
+      <div class="row"><label for="adoption">Sign-up pattern</label>
+        <select id="adoption"><option value="uniform">Scattered</option><option value="clustered">Clustered (word of mouth)</option></select></div>
+      <div class="row"><label for="assign">Day split</label>
+        <select id="assign"><option value="town">One town per day</option><option value="sweep">Pie slices around Williston</option></select></div>
+      <div class="row"><label for="recycling">Recycling</label>
+        <select id="recycling"><option value="trash">Trash only</option><option value="sameday">Both carts, same day, two passes (leading option)</option><option value="alternate">Alternate weeks (same trailer)</option><option value="both">Both carts, one visit (split trailer)</option></select></div>
+      <div class="row"><label for="lbs_per_stop">Trash lb per pickup</label><input id="lbs_per_stop" type="number" step="5"></div>
+      <div class="row"><label for="load_lbs">Trash per full trailer (lb)</label><input id="load_lbs" type="number" step="250"></div>
+      <div class="row"><label for="recycle_lbs">Recycling lb per pickup</label><input id="recycle_lbs" type="number" step="5"></div>
+      <div class="row"><label for="recycle_load_lbs">Recycling per full trailer (lb)</label><input id="recycle_load_lbs" type="number" step="100"></div>
+      <div class="row"><label for="split_trash_pct">Split trailer: trash side (%)</label><input id="split_trash_pct" type="number" min="10" max="90" step="5"></div>
+      <div class="row"><label for="stop_min">Minutes per stop</label><input id="stop_min" type="number" step="0.25"></div>
+      <div class="row"><label for="dump_min">Minutes at dump</label><input id="dump_min" type="number" step="5"></div>
+      <div class="row"><label for="seed">Random seed</label><input id="seed" type="number" step="1"></div>
+      <button id="solveBtn" type="submit">Re-plan routes</button>
+      <div id="status" class="status" role="status"></div>
+    </form>
+  </section>
+
+  <section>
+    <h2>Battery</h2>
+    <div class="seg" role="radiogroup" aria-label="Season">
+      <input type="radio" name="season" id="sSummer" value="summer"><label for="sSummer">Summer</label>
+      <input type="radio" name="season" id="sWinter" value="winter" checked><label for="sWinter">Winter</label>
+    </div>
+    <div class="row"><label for="battery">Battery (kWh)</label><input id="battery" type="number" value="200" step="5"></div>
+    <div class="row"><label for="reserve">Keep in reserve (%)</label><input id="reserve" type="number" value="15" step="5"></div>
+    <div class="row"><label for="kwhmi">Towing kWh / mile</label><input id="kwhmi" type="number" value="1.2" step="0.05"></div>
+    <div class="row"><label for="winterPen">Winter driving penalty (%)</label><input id="winterPen" type="number" value="35" step="5"></div>
+    <div class="row"><label for="heatKw">Winter cab heat (kW)</label><input id="heatKw" type="number" value="4" step="0.5"></div>
+    <div class="row"><label for="tipKwh">Tipper kWh / stop</label><input id="tipKwh" type="number" value="0.03" step="0.01"></div>
+    <div class="row"><label for="workHrs">Workday (hours)</label><input id="workHrs" type="number" value="9" step="0.5"></div>
+    <div class="row"><label for="charges">Charges per day</label>
+      <select id="charges"><option value="1">1 · overnight only</option><option value="2" selected>2 · plus a midday fast charge</option></select></div>
+    <div class="row"><label for="chargeMin">Midday charge (minutes)</label><input id="chargeMin" type="number" value="45" step="5"></div>
+    <div class="row"><label for="chargeKw">Midday charger (kW)</label><input id="chargeKw" type="number" value="125" step="5"><span class="hint">Default: Richmond ChargePoint by I-89 Exit 11. The truck averages less than the charger's peak as the battery fills.</span></div>
+  </section>
+
+  <section>
+    <h2>Summary</h2>
+    <div id="tiles" class="tiles"></div>
+    <p id="capNote" class="note"></p>
+  </section>
+
+  <section>
+    <h2>Service days <button id="showAll" class="link" type="button">show all</button></h2>
+    <div class="tblwrap"><table id="days">
+      <thead><tr><th>Day</th><th class="n">Stops</th><th class="n">Miles</th><th class="n">Loads</th><th class="n">Hours</th><th class="n" title="Energy as a share of one charge (usable battery = total minus reserve). Over 100% needs a midday charge.">% of charge</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <label class="check"><input id="showHomes" type="checkbox" checked> Show all homes (gray)</label>
+    <label class="check"><input id="showChargers" type="checkbox" checked> Show fast chargers (⚡)</label>
+  </section>
+
+  <section>
+    <details>
+      <summary><b>Appendix: why Williston, not Coventry</b></summary>
+      <p class="note">Coventry (near Newport) is Vermont's only landfill, ~75–80 miles from Burlington. Settled: we dump in Williston. The comparison, for the Silverado towing at ~1.2 kWh/mile:</p>
+      <div class="tblwrap"><table>
+        <thead><tr><th></th><th>Williston</th><th>Coventry</th></tr></thead>
+        <tbody>
+          <tr><td>Round trip</td><td class="n">~16 mi, ~40 min</td><td class="n">~155 mi, 3.5–4 h</td></tr>
+          <tr><td>Energy, route + dump</td><td class="n">~90 kWh (2 runs)</td><td class="n">~235 kWh (1 run)</td></tr>
+          <tr><td>vs usable battery</td><td class="n">fits winter (~140)</td><td class="n">over summer (~200)</td></tr>
+          <tr><td>Dump fee</td><td class="n">~$125/ton</td><td class="n">maybe $20–40/ton less (est.)</td></tr>
+          <tr><td>Saved per ~1.75 t load</td><td class="n">—</td><td class="n">$35–70 for half a day</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">The county district fee and the $6/ton state tax apply either way.</p>
+    </details>
+  </section>
+
+  <footer>Addresses: Vermont E911 address points (VCGI). Roads: © OpenStreetMap contributors. Routing: OR-Tools.</footer>
+</aside>
+<main id="map"></main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="/web/app.js"></script>
+</body>
+</html>

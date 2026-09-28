@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/web/favicon.svg" type="image/svg+xml">
+<title>Quiet Route Hauling Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<nav class="sitenav" aria-label="Site"><a class="brand" href="index.html">Quiet Route</a><a href="plan.html" aria-current="page">Business plan</a><a href="hardware.html">Hardware</a><a href="software.html">Software</a><a href="policies.html">Policies</a><a href="regulatory.html">Regulatory</a><a href="risks.html">Risks</a><a href="routing.html">Routing</a></nav>
+<div class="wrap">
+<nav class="toc" aria-label="Sections">
+  <b>Plan</b>
+  <a href="#verdict">Short answer</a>
+  <a href="#rig">Launch setup</a>
+  <a href="#model">Cost model</a>
+  <a href="#range">Where loads go</a>
+  <a href="#ops">Daily operation</a>
+  <a href="#customers">Customers &amp; pricing</a>
+  <a href="#recycling">Recycling</a>
+  <a href="#compost">Composting</a>
+  <a href="#drivers">Team &amp; hiring</a>
+  <a href="#upgrade">Growth path</a>
+  <a href="#startup">Startup budget</a>
+  <a href="#fundraising">Fundraising</a>
+  <a href="#thresholds">When to commit</a>
+  <a href="#valuation">Valuation</a>
+  <a href="#unasked">Open questions</a>
+  <a href="#next">First 90 days</a>
+  <a href="#vehicles">Appendix: vehicles</a>
+  <a href="#diesel">Appendix: diesel vs EV</a>
+</nav>
+
+<main>
+<header class="top">
+  <div class="eyebrow">Business plan · Chittenden County, Vermont · September 2026</div>
+  <h1>Quiet Route Hauling</h1>
+  <p class="lede">Quiet Route is a battery-electric trash, recycling and compost service for Jericho, Essex, Hinesburg and Richmond. It launches with a used electric pickup pulling a dump trailer, which costs about a third as much as a garbage truck. The pitch to customers is the same pickup, without the diesel noise at 6 a.m. It works if routes are dense, the Williston dump rate is fair, and equipment stays cheap until the customer base is there.</p>
+  <div class="meta">Figures are planning estimates from public sources and our own route modeling. Quotes come before commitments.</div>
+</header>
+
+<section id="verdict">
+  <h2>The short answer</h2>
+  <div class="verdict">
+    <div class="v"><b>Start with a pickup and a trailer</b><p>A used Silverado EV, a dump trailer, a cart tipper and a tarp come to about $85–95k all in. A small electric garbage truck runs $200k+. The setup also needs no commercial license (CDL), which widens the hiring pool.</p></div>
+    <div class="v"><b>Break-even is about 200 customers</b><p>That's with a hired driver paid per route day, recycling included, and a $50/month average price.</p></div>
+    <div class="v"><b>One truck serves ~550–800 customers</b><p>Both carts are collected on the same day. The top of the range needs a midday fast charge in winter. After that we add a split trailer or a second truck.</p></div>
+    <div class="v"><b>Everything tips in Williston</b><p>Trash, recycling and food scraps each go to a facility in Williston, within 3 miles of each other. Dump runs fit easily inside a day's charge.</p></div>
+    <div class="v"><b>Price by cart size</b><p>Vermont requires household trash to be priced by volume or weight, so we offer 32, 64 and 96 gallon tiers, with recycling included.</p></div>
+    <div class="v"><b>Get the dump rate in writing first</b><p>Casella owns the Williston transfer station and the landfill it feeds, and it's also the largest hauler we'd compete with. We get a written rate before buying anything.</p></div>
+  </div>
+</section>
+
+<section id="rig">
+  <h2>The launch setup<small>One electric pickup, one dump trailer, one cart tipper</small></h2>
+  <div class="rig">
+    <div class="part"><span>Tow vehicle</span><b>Used Silverado EV, 2024+</b><div class="n">~$55–60k</div><p>~200 kWh battery, tows 10,000 lb (RST) or 12,500 lb (2025+ Work Truck/LT with Max Tow). Details on the <a href="hardware.html#truck">Hardware page</a>.</p></div>
+    <div class="part"><span>Trailer</span><b>7×14 dump, 4 ft sides</b><div class="n">~$9,500–10,500</div><p>Griffin, Big Tex 14LP, Texas Pride or similar. About 3,900 lb empty.</p></div>
+    <div class="part"><span>Loading</span><b>Hydraulic cart tipper</b><div class="n">~$4,000–8,000</div><p>A garbage-truck cart lifter, mounted by a truck-equipment shop just ahead of the trailer's axles. It runs off the truck's power outlets.</p></div>
+    <div class="part"><span>Cover</span><b>Electric roll tarp</b><div class="n">~$1,000–2,000</div><p>Keeps trash from blowing out. Vermont requires loads to be secured.</p></div>
+  </div>
+  <div class="callout">
+    <p><b>What limits a load:</b> loose trash is light (~225–300 lb per cubic yard), so the trailer fills by volume at ~1.6–2.2 tons, about 55–70 houses per load. Loaded, it stays around 7,000–8,000 lb, inside the Silverado's towing and payload limits.</p>
+    <p><b>Checks on any used Silverado EV:</b> the original window sticker (trim, towing package, four-wheel steering), the payload figure on the door-jamb sticker, a battery health report, and remaining battery warranty (GM: 8 years / 100,000 miles). Also check wheel size, since RST trims came on very large wheels that make winter tires expensive.</p>
+  </div>
+  <h3>Equipment budget</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Item</th><th class="n">Low</th><th class="n">High</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Used Silverado EV</td><td class="n">$55,000</td><td class="n">$60,000</td><td>A 2024 RST with ~28k miles listed at $58,999 in Sept 2026</td></tr>
+      <tr><td>Vermont purchase and use tax (6%)</td><td class="n">$3,300</td><td class="n">$3,600</td><td>Paid at registration</td></tr>
+      <tr><td>Title, registration, commercial plates</td><td class="n">$300</td><td class="n">$600</td><td></td></tr>
+      <tr><td>Dump trailer, plus 6% tax</td><td class="n">$10,000</td><td class="n">$11,100</td><td>Registered separately</td></tr>
+      <tr><td>Cart tipper, mounting, electric pump</td><td class="n">$4,000</td><td class="n">$8,000</td><td>Used tippers exist</td></tr>
+      <tr><td>Electric roll tarp</td><td class="n">$1,000</td><td class="n">$2,000</td><td></td></tr>
+      <tr><td>Winter wheels and tires</td><td class="n">$2,500</td><td class="n">$4,000</td><td>Depends on what fits</td></tr>
+      <tr><td>Level 2 charger, installed (48 A)</td><td class="n">$1,500</td><td class="n">$3,000</td><td>~11.5 kW, refills a normal day overnight</td></tr>
+      <tr><td>Hitch parts, electric tongue jack, lights, lettering</td><td class="n">$1,600</td><td class="n">$3,900</td><td>Lettering doubles as advertising</td></tr>
+      <tr class="total"><td>Setup, all in</td><td class="n">~$79,000</td><td class="n">~$96,000</td><td></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="model">
+  <h2>Cost model<small>Change any number. Every figure recalculates. Picking a setup fills in its typical values.</small></h2>
+  <div class="calc">
+    <div class="inputs">
+      <div class="grp">Setup</div>
+      <div class="field wide"><label for="rigsel">Equipment</label>
+        <select id="rigsel">
+          <option value="sil" selected>Used Silverado EV + dump trailer + tipper</option>
+          <option value="f150">Used F-150 Lightning + dump trailer + tipper</option>
+          <option value="nrrpack">New Isuzu NRR-EV + 8–10 yd compactor (~$250k)</option>
+          <option value="nrrdump">New Isuzu NRR-EV + high-side dump body + tipper (~$205k)</option>
+          <option value="c6">New Class 6 electric garbage truck, 10–13 yd (~$300k)</option>
+          <option value="mack">New Mack LR Electric (lease)</option>
+          <option value="diesel">Used diesel garbage truck (comparison)</option>
+        </select></div>
+      <div class="field"><label for="truckpay">Equipment payment ($/mo)</label><input id="truckpay" type="number" value="1700" step="50"><div class="hint">~$85k financed at 8% over 5 years ≈ $1,700</div></div>
+      <div class="field"><label for="load">Tons per load</label><input id="load" type="number" value="1.75" step="0.25"><div class="hint">What the setup carries before a dump run. A trailer fills by volume at ~1.5–2 t.</div></div>
+      <div class="field"><label for="kwhmi">kWh per mile</label><input id="kwhmi" type="number" value="1.2" step="0.1"><div class="hint">Enter 0 for diesel (3.5 mpg at $5.00/gal)</div></div>
+      <div class="field"><label for="kwh">Electricity ($/kWh)</label><input id="kwh" type="number" value="0.19" step="0.01"></div>
+      <div class="field"><label for="miles">Route miles per day</label><input id="miles" type="number" value="40" step="5"><div class="hint">Collection only. Each Williston run adds 16 miles</div></div>
+      <div class="field"><label for="charger">Parking and charging ($/mo)</label><input id="charger" type="number" value="600" step="100"><div class="hint">Somewhere to park the trailer, plus a charger</div></div>
+
+      <div class="grp">Customers</div>
+      <div class="field"><label for="cust">Residential customers</label><input id="cust" type="number" value="400" min="0" step="50"></div>
+      <div class="field"><label for="price">Average price ($/mo)</label><input id="price" type="number" value="50" min="0" step="1"><div class="hint">Every-other-week service = 26 pickups a year</div></div>
+      <div class="field"><label for="lbs">Pounds per pickup</label><input id="lbs" type="number" value="60" min="0" step="5"></div>
+      <div class="field wide"><label for="recmode">Recycling</label>
+        <select id="recmode">
+          <option value="sameday" selected>Same day, two passes: recycling, then trash</option>
+          <option value="alternate">Alternate weeks: trash one week, recycling the next</option>
+          <option value="split">Split trailer: both carts in one visit</option>
+          <option value="none">None (trash only)</option>
+        </select></div>
+      <div class="field"><label for="reclbs">Recycling lb per pickup</label><input id="reclbs" type="number" value="20" step="5"></div>
+      <div class="field"><label for="recfee">Recycling fee ($/ton)</label><input id="recfee" type="number" value="40" step="5"><div class="hint">CSWD recycling facility. $25 in 2018, so ask for the current rate</div></div>
+      <div class="field"><label for="stops">Stops per route day</label><input id="stops" type="number" value="100" step="10"><div class="hint">Pickup and trailer ~80–110, a garbage truck 200–400+</div></div>
+
+      <div class="grp">Disposal &amp; overhead</div>
+      <div class="field"><label for="tip">Dump fee, all in ($/ton)</label><input id="tip" type="number" value="160" step="5"><div class="hint">~$125 Williston + county fee + $6 state tax</div></div>
+      <div class="field"><label for="owner">Owner salary ($/yr)</label><input id="owner" type="number" value="0" step="5000"><div class="hint">$0: the owner keeps a day job and isn't paid by the business</div></div>
+      <div class="field"><label for="crew">Hired drivers per route day</label><input id="crew" type="number" value="1" min="0" max="2" step="1"></div>
+      <div class="field"><label for="wage">Driver wage ($/hr)</label><input id="wage" type="number" value="26" step="1"><div class="hint">Paid 9 hours per route day. Payroll tax and workers' comp add 35%</div></div>
+      <div class="field"><label for="ins">Insurance ($/mo)</label><input id="ins" type="number" value="900" step="100"></div>
+      <div class="field"><label for="other">Maintenance, software, marketing ($/mo)</label><input id="other" type="number" value="1200" step="100"></div>
+    </div>
+
+    <div class="outputs" aria-live="polite">
+      <div class="kpis">
+        <div class="kpi"><span>Revenue / mo</span><strong id="oRev">–</strong></div>
+        <div class="kpi"><span>Costs / mo</span><strong id="oCost">–</strong></div>
+        <div class="kpi"><span>Profit / mo</span><strong id="oProfit">–</strong><em id="oMargin"></em></div>
+        <div class="kpi"><span>Break-even</span><strong id="oBE">–</strong><em>customers</em></div>
+      </div>
+      <div class="grp">Monthly costs</div>
+      <div class="bars" id="costBars"></div>
+      <div class="grp">Operations</div>
+      <div class="bars" id="opsBars"></div>
+      <div class="grp">At other customer counts</div>
+      <div class="tbl" style="margin-top:6px"><table id="scen"><thead><tr><th>Customers</th><th class="n">Route days / week</th><th class="n">Revenue / mo</th><th class="n">Profit / mo</th></tr></thead><tbody></tbody></table></div>
+      <p class="small">The driver is paid only on route days, at 9 hours a day. Card and billing fees are 3% of revenue. Same-day or alternate-week recycling doubles the stops. The split trailer adds ~30% to route time instead.</p>
+    </div>
+  </div>
+</section>
+
+<section id="range">
+  <h2>Where loads go<small>All three facilities are in Williston, within 3 miles of each other</small></h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Stream</th><th>Facility</th><th>Fee</th><th>Hours</th></tr></thead>
+    <tbody>
+      <tr><td>Trash</td><td>Casella transfer station, 262 Avenue B</td><td>~$125/ton (2026 town bid; private haulers may be quoted differently), plus the county district fee and the $6/ton state tax</td><td>Mon–Fri 7:30–4, Sat 7–1</td></tr>
+      <tr><td>Recycling</td><td>CSWD recycling facility, 357 Avenue C</td><td>Per-ton hauler fee ($25 in 2018; ask). New facility expected January 2027.</td><td>Mon–Fri 6–3</td></tr>
+      <tr><td>Food scraps</td><td>Green Mountain Compost, 1042 Redmond Rd</td><td>Ask. Contamination fines $75–150/ton.</td><td>Ask</td></tr>
+    </tbody>
+  </table></div>
+  <p>A Williston round trip from the routes is ~16 miles and ~40 minutes including the stop. On the Silverado that's ~20 kWh towing, so two dump runs fit easily in one charge. <b>Questions for Casella:</b> the current rate for a small private hauler, whether there's a <b>minimum charge per load</b> (it matters with ~1.5–2-ton loads), and whether they discount for steady monthly volume. How to set up hauler accounts is on the <a href="regulatory.html#disposal">Regulatory page</a>.</p>
+</section>
+
+<section id="ops">
+  <h2>Daily operation<small>Two passes a day, dump runs, charging</small></h2>
+  <div class="cols">
+    <div>
+      <h3>Route days</h3>
+      <p>Each customer has one pickup day every other week, with both carts out. The driver makes <b>two passes</b> over that day's houses: one for recycling, one for trash.</p>
+      <p>At ~100 stops a day that's ~50 houses a day. <b>400 customers ≈ 4 route days a week.</b> A full schedule of ~500–550 customers fills all 10 days in the two-week cycle.</p>
+    </div>
+    <div>
+      <h3>Loads and hours</h3>
+      <p>Each pass fills the trailer about once or twice. Trash goes to Casella's transfer station, and recycling to the CSWD recycling facility 300 m away.</p>
+      <p><b>Run recycling first.</b> The recycling facility closes at 3pm and the transfer station at 4pm. Each Williston run adds ~16 miles and ~40 minutes.</p>
+    </div>
+    <div>
+      <h3>Charging</h3>
+      <p>A 48 A Level 2 charger at the yard refills a normal day overnight. The longest winter days need a <b>midday fast charge</b>. Richmond's ChargePoint by I-89 Exit 11 has two 125 kW stalls. We charge right after a dump run, with the trailer empty, at roughly $15–20 a stop.</p>
+    </div>
+  </div>
+</section>
+
+<section id="customers">
+  <h2>Customers, pricing and billing<small>Residential or commercial?</small></h2>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>Residential</th><th>Commercial, using carts</th><th>Commercial, using dumpsters</th></tr></thead>
+    <tbody>
+      <tr><td><b>Revenue per stop</b></td><td>Low ($20–30 per pickup)</td><td>Medium</td><td>High ($40–150+ per lift)</td></tr>
+      <tr><td><b>Equipment</b></td><td>Trailer and tipper</td><td>Same</td><td>Needs a front-loading truck, a second vehicle</td></tr>
+      <tr><td><b>Customers switching</b></td><td>Rare</td><td>Sometimes</td><td>Rebid on price every contract</td></tr>
+      <tr><td><b>How you find them</b></td><td>Front Porch Forum, door hangers, referrals</td><td>Walk in and talk to the owner</td><td>Competing with Casella on price</td></tr>
+      <tr><td><b>Appeal of electric</b></td><td>Quiet early mornings</td><td>Strong for co-ops, breweries, cafés</td><td>Institutions, but they decide slowly</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Recommendation:</b> sign up homes one neighborhood at a time, and add businesses on the same streets that use carts. A stop 100 feet from the last one costs almost nothing. One two miles away costs real money. Dumpsters wait until a second truck makes sense.</p>
+  <h3>Pricing</h3>
+  <ul class="list">
+    <li><b>Check the $50 draft against what others charge.</b> Get quotes from Casella, Myers and the small local haulers for weekly and every-other-week service. If we're above their weekly price, we sell quiet electric pickup as a premium service.</li>
+    <li><b>Price by cart size</b> to meet Vermont's volume-pricing rule. For example, every other week: 32 gal $35, 64 gal $50, 96 gal $65 per month. Weekly at about 1.7× those prices.</li>
+    <li><b>Bill in advance on autopay</b>, monthly or quarterly, by card or bank transfer. Chasing unpaid invoices from hundreds of small accounts eats margin.</li>
+    <li>Charge extra for overflow bags, big items, and make-up pickups after holidays.</li>
+    <li><b>Carts</b> stay company property (sourcing and cost on the <a href="hardware.html#carts">Hardware page</a>). We recover them with a one-time ~$25 cart fee, or waive it for a 12-month commitment.</li>
+  </ul>
+  <h3>Billing businesses</h3>
+  <ul class="list">
+    <li>Price by cart size × pickups per week, as a flat monthly rate. Add fees for extra pickups and for contaminated recycling.</li>
+    <li>Use a one-year agreement that renews automatically but can be cancelled with 30 days' notice. Being easy to leave is a selling point against the big haulers' contracts.</li>
+    <li>We skip the fuel surcharge that diesel haulers add, and advertise that.</li>
+    <li>Use hauler software (CurbWaste, TrashFlow, Routeware) for billing and routes.</li>
+  </ul>
+</section>
+
+<section id="recycling">
+  <h2>Recycling<small>Required by Vermont law, and the biggest factor in how many customers a truck can serve</small></h2>
+  <p>Vermont's Universal Recycling Law requires any hauler collecting household trash to <b>offer recycling collection</b>, with its cost <b>built into the trash price</b> (no separate line item). None of our four towns collects recycling itself, so it's on us.</p>
+  <h3>Leading option: both carts on the same day</h3>
+  <p>Customers put both carts out on one day every other week. The truck makes a recycling pass, dumps, then makes a trash pass. It's the simplest arrangement for customers: one day to remember, and nothing left at the curb for a second day. The cost is that two passes land on the same day, so the longest winter days need a midday charge to reach full capacity.</p>
+  <h3>Fallback: alternate weeks</h3>
+  <p>Trash one week, recycling the next, same weekday. It spreads the work across more days, so it needs midday charging less often. It's common in New England, but it's more to remember.</p>
+  <h3>Future plan: a split trailer</h3>
+  <p>A lengthwise divider lets one pass collect both carts. Myers already does this locally with split-body trucks. The route planner shows it serves ~25–35% more customers per truck. Design on the <a href="hardware.html#split">Hardware page</a>.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Winter customers per truck</th><th class="n">Silverado: overnight only</th><th class="n">+ midday charge</th><th class="n">Lightning: overnight only</th><th class="n">+ midday charge</th></tr></thead>
+    <tbody>
+      <tr><td><b>Same day, two passes</b> (leading)</td><td class="n">~550–585</td><td class="n">~680–800</td><td class="n">~240–355</td><td class="n">~580–755</td></tr>
+      <tr><td>Alternate weeks</td><td class="n">~550–740</td><td class="n">~770–875</td><td class="n">~400–450</td><td class="n">~670–870</td></tr>
+      <tr><td>Split trailer (future)</td><td class="n">~700–1,000</td><td class="n">~870–1,000</td><td class="n">~425–640</td><td class="n">~730–985</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">From the <a href="routing.html">route planner</a> at 600 and 1,200 customers across the four towns, with a 45-minute midday charge at 125 kW. The upper ends are limited by a 9-hour day, not the battery.</p>
+  <ul class="list">
+    <li><b>Recycling is bulky.</b> Cardboard and containers fill the trailer by volume even faster than trash.</li>
+    <li><b>Disposal cost:</b> CSWD charges haulers a per-ton fee at its recycling facility ($25/ton in 2018; current rate to confirm). A new facility is expected to open in January 2027. Recycling adds roughly $1–2 per customer per month (estimate).</li>
+    <li><b>Take-up:</b> many rural households already take recycling to CSWD drop-off centers for free. We must <em>offer</em> pickup. The founding campaign will ask who wants it, and whether customers prefer same-day or alternate weeks.</li>
+    <li><b>Price:</b> the $35 / $50 / $65 cart tiers include recycling.</li>
+  </ul>
+</section>
+
+<section id="compost">
+  <h2>Composting<small>Food scraps have been banned from Vermont landfills since 2020, so customers will ask</small></h2>
+  <p>People who pick an electric hauler are the people most likely to want food-scrap pickup. It's a natural add-on, but it can't go in the trash trailer, and the Silverado has little payload to spare. Here's how to do it without breaking either.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Option</th><th>How it works</th><th>Good</th><th>Watch</th></tr></thead>
+    <tbody>
+      <tr><td><b>5-gallon bucket swap</b></td><td>Customer fills a lidded bucket with a compostable liner. We take the full one and leave a clean one.</td><td>Cheap containers (~$5–8 each). Clean for the customer. Bootstrap Compost in Boston runs this model.</td><td>Buckets have to be washed, so the yard needs water and a drain. Full buckets weigh ~30–35 lb.</td></tr>
+      <tr><td><b>13–23 gal organics cart</b></td><td>Small green cart, tipped like the trash cart</td><td>Fast at the curb, and works with the tipper</td><td>Carts get gross and customers will want them washed. Higher cost per cart.</td></tr>
+      <tr><td><b>Drop-off</b> (no service)</td><td>Customer takes scraps to a CSWD drop-off center</td><td>Free for them, nothing for us to do</td><td>We earn nothing and miss the chance to build loyalty</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Where the buckets ride</h3>
+  <p><b>Not on trash days.</b> The truck bed is empty on trash days, but the RST's ~1,300–1,500 lb payload is mostly used by the ~900 lb trailer tongue. That leaves room for only ~10–15 full buckets. Instead, run <b>compost as its own route without the trailer</b>. With the trailer off, the full payload is available: ~35–40 buckets on a bed rack, and much better range. One compost day a week covers ~150–200 bucket customers on every-other-week service.</p>
+  <h3>Where it goes</h3>
+  <p><b>Green Mountain Compost</b> in Williston, run by the county solid waste district (CSWD). It's a different facility from Casella's transfer station, but in the same town, so a combined run is short. The hauler fee per ton isn't published, so call them (802-660-4949). They fine haulers for contamination: $75/ton when a load is 5–10% contaminated and $150/ton over 10%. Compostable liners and one warning tag before refusing a bucket keep us under that.</p>
+  <h3>Price</h3>
+  <p>Bootstrap charges about $16 per every-other-week visit in the Boston area. Here, <b>$12–18/month</b> as an add-on for every-other-week service seems right (estimate; tested in the founding campaign). Lake Champlain Sanitation / No Waste Compost already collects food scraps in our towns. Talk to them: they could be a partner or a subcontractor for compost before we're a competitor.</p>
+</section>
+
+<section id="drivers">
+  <h2>Team and hiring<small>A hired driver from day one</small></h2>
+  <p><b>Roles:</b> the founder keeps a full-time job in software and runs the business side: the software, billing, sales, accounting and dump-site accounts. A <b>hired driver</b> runs the routes from launch, with a <b>trained backup driver</b> for sick days and vacations.</p>
+  <p><b>What the job is like:</b> trash collection is consistently among the five or six deadliest jobs in the US, mostly from traffic at the curb and from backing accidents. It's also physical, early-morning work in all weather. People stay for being home every night, finishing when the route is done, and steady work.</p>
+  <ul class="list">
+    <li><b>It starts part-time.</b> 200–300 customers is 2–3 route days a week. It becomes a full-time job around ~450–550 customers.</li>
+    <li><b>No commercial license needed</b> for the pickup and trailer, so far more people qualify.</li>
+    <li><b>Offer a four-day week, or pay by the route,</b> so the driver goes home when it's done.</li>
+    <li><b>The tipper keeps people.</b> No lifting means fewer back injuries, lower workers' comp and less turnover.</li>
+    <li><b>Pay ~$24–30/hr</b> (estimate; check local postings). Without benefits we'd lose people to Casella and town public works.</li>
+    <li><b>Where to find people:</b> construction dump-truck drivers who want winter work, school bus drivers who want the summer covered, and retirees for backup shifts.</li>
+  </ul>
+</section>
+
+<section id="upgrade">
+  <h2>Growth path<small>What comes after the first truck fills up</small></h2>
+  <ol class="steps">
+    <li><b>Split trailer</b> (~$3–7k on top of a second trailer). One visit collects both carts, for ~25–35% more customers per truck. The first trailer becomes the backup.</li>
+    <li><b>Second pickup and trailer</b> at ~550–800 customers. It adds capacity and covers breakdowns.</li>
+    <li><b>A compacting truck</b> at ~1,000+ customers: a Class 6 electric chassis rated at 25,995 lb, which still needs no commercial license, with a 10–13 yd compactor (~$300k).</li>
+  </ol>
+  <p>The full list of vehicles we compared is in the <a href="#vehicles">appendix</a>.</p>
+</section>
+
+<section id="startup">
+  <h2>Startup budget<small>All cash needed before steady revenue</small></h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Item</th><th class="n">Low</th><th class="n">High</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Equipment, all in (see above)</td><td class="n">$83,000</td><td class="n">$94,500</td><td>Financing it cuts upfront cash to ~$15–20k down</td></tr>
+      <tr><td>Carts</td><td class="n">$6,000</td><td class="n">$28,000</td><td>200 used at $30, up to 400 new at $70</td></tr>
+      <tr><td>Insurance deposit</td><td class="n">$3,000</td><td class="n">$6,000</td><td>Commercial auto, general liability, pollution</td></tr>
+      <tr><td>Permits, LLC setup, legal</td><td class="n">$1,500</td><td class="n">$4,000</td><td></td></tr>
+      <tr><td>Launch marketing and website</td><td class="n">$3,000</td><td class="n">$8,000</td><td>Door hangers, trailer lettering</td></tr>
+      <tr><td>Working capital (4–6 months of losses)</td><td class="n">$25,000</td><td class="n">$40,000</td><td>Customers sign up slowly</td></tr>
+      <tr class="total"><td>Paying cash for everything</td><td class="n">~$122k</td><td class="n">~$181k</td><td></td></tr>
+      <tr class="total"><td>Financing the equipment</td><td class="n">~$55k</td><td class="n">~$105k</td><td>SBA 7(a) loans, VEDA, or dealer financing</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="fundraising">
+  <h2>Fundraising and marketing<small>A founding-member campaign, run on our own site</small></h2>
+  <p>The pitch is "help us bring quiet, electric trash pickup to your street," not "buy our service." Density is the whole business, so every neighbor who signs up makes the route cheaper for everyone. That gives customers a real reason to recruit their neighbors.</p>
+  <h3>Why build our own instead of using Kickstarter</h3>
+  <ul class="list">
+    <li>Every pledge becomes a customer record in our billing system, with an address checked against our route zones, a cart size and a saved payment method. Kickstarter backers would have to be re-signed-up later, and some would drop off.</li>
+    <li>We keep the 5–10% platform fee.</li>
+    <li>We can show live progress <b>per zone</b>, such as "Jericho Wk B: 23 of 30 neighbors." That's more motivating than one national total.</li>
+    <li>We can copy Kickstarter's all-or-nothing idea: <b>save the card now, charge only when the zone hits its threshold</b>. Stripe supports saving a card without charging it.</li>
+  </ul>
+  <h3>Let them choose how to back it</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Tier</th><th>What they pay now</th><th>What they get</th><th>Why offer it</th></tr></thead>
+    <tbody>
+      <tr><td><b>Reserve</b></td><td>$0, or $1 to confirm the card is real</td><td>A spot on the route. Billing starts at the first pickup.</td><td>Lowest friction. It's the headline number.</td></tr>
+      <tr><td><b>Founding member</b></td><td>3 months prepaid at 20% off</td><td>Price locked for 2 years and a founding-member cart sticker</td><td>Cash for equipment, and proof of commitment</td></tr>
+      <tr><td><b>Patron</b></td><td>$250+, credited toward service</td><td>Name on the trailer, a cart for a neighbor, or a donated service month for a family that needs it</td><td>For supporters who want to do more than subscribe</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Rules we have to follow:</b> prepaid money isn't ours until we deliver service. Keep it in a separate account, publish a launch date, and refund automatically if a zone doesn't launch by that date. Vermont's consumer protection law applies. Keep it simple and honest.</p>
+  <h3>Bigger money: debt, community equity, or a co-op</h3>
+  <ul class="list">
+    <li><b>Equipment loan</b> (SBA 7(a), VEDA, or dealer financing). This is the normal route for the ~$85–95k setup.</li>
+    <li><b>Vermont community investment.</b> Vermont's Small Business Offering exemption lets a Vermont company raise money from Vermont residents. The limit is at least $1M; sources differ on whether it's since been raised. Ordinary investors can put in up to $10,000 each. Customers who become owners make strong word-of-mouth marketers.</li>
+    <li><b>A co-op is more workable than it seems.</b> Grocery co-ops also hire specialized staff: the members own the business and professionals run it. A <b>consumer co-op</b> (customers own it) or a <b>multi-stakeholder co-op</b> (workers and customers own it together) fits "we're in it together." Examples in this field: Pedal People in Northampton (a worker co-op hauling trash by bicycle for 10–12% of the town's households) and CERO in Boston (a worker co-op collecting commercial compost). The Vermont Employee Ownership Center and the Cooperative Fund of the Northeast help co-ops get started. The cost is slower decisions and more paperwork. It's worth one conversation with VEOC before we set up the company.</li>
+  </ul>
+  <h3>Marketing that fits a density business</h3>
+  <ul class="list">
+    <li><b>Front Porch Forum</b> posts, one town at a time, linking to that zone's progress bar.</li>
+    <li><b>Street captains:</b> the first signup on a road gets a free month for every 3 neighbors who join.</li>
+    <li><b>Ongoing referral credit:</b> $10 off for both sides.</li>
+    <li>The quiet electric truck is the ad. Put a large "Quiet Route" wrap and the website address on the trailer.</li>
+  </ul>
+</section>
+
+<section id="thresholds">
+  <h2>When to commit<small>Sign-ups needed before each spending decision</small></h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Decision</th><th class="n">Threshold</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Open a route day in a zone</td><td class="n">25–30 houses</td><td>The route planner shows fewer houses than that spend most of the day driving to and from Williston.</td></tr>
+      <tr><td>Buy the truck and trailer</td><td class="n">~150 reserved, ~50 prepaid</td><td>Break-even with a hired driver is ~200. 150 committed plus 4–6 months of working capital covers the gap.</td></tr>
+      <tr><td>Launch service</td><td class="n">3–4 zones at threshold</td><td>Enough for 1–2 route days a week. Launch the zones that are ready and let the others keep filling.</td></tr>
+      <tr><td>Hire a part-time driver and a backup</td><td class="n">At launch</td><td>The founder keeps a day job. The driver goes full-time around ~450–550 customers.</td></tr>
+      <tr><td>Split trailer or second truck</td><td class="n">~550–600</td><td>One Silverado's winter limit with same-day recycling on an overnight charge. Daily midday charging stretches it to ~700–800.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="valuation">
+  <h2>What the company is worth<small>Rules of thumb, not an appraisal</small></h2>
+  <p>Small hauling companies usually sell in one of two ways. Buyers either pay about <b>1–1.5× annual revenue</b> for the customer accounts (the "route"), or a multiple of profit before interest, taxes, depreciation and owner pay. For small, owner-run haulers that multiple is roughly <b>3–6×</b> (estimate). Casella is actively buying: six acquisitions in the first half of 2025 and five in the first half of 2026. So there's a real buyer if we ever want one.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Stage</th><th class="n">Customers</th><th class="n">Revenue / yr</th><th class="n">Rough value</th><th>What drives it</th></tr></thead>
+    <tbody>
+      <tr><td>One pickup + trailer, hired driver</td><td class="n">600</td><td class="n">~$360k</td><td class="n">~$350–550k</td><td>Profitable and runs without the founder day to day, but small. Buyers discount for size and for month-to-month customers.</td></tr>
+      <tr><td>One garbage truck, one hire</td><td class="n">2,000</td><td class="n">~$1.2M</td><td class="n">~$1.2–2M</td><td>Can run without the founder. Dense routes are worth more per customer.</td></tr>
+      <tr><td>Three trucks, small team</td><td class="n">5,000</td><td class="n">~$3M</td><td class="n">~$3–6M</td><td>Large enough for a consolidator to want, especially if dump-fee contracts carry over.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Revenue assumes $50/month average. Value goes up with signed agreements, dense routes, low churn and clean books. It goes down with customers on month-to-month plans and anything that depends on one person. A co-op structure changes this: it isn't set up to be sold, and that's usually the point.</p>
+</section>
+
+<section id="unasked">
+  <h2>Open questions<small>What we still need to find out</small></h2>
+  <ol class="steps">
+    <li><b>Casella's rate for a small private hauler,</b> and whether there's a minimum charge per load. That matters at ~1.5–2 tons a load.</li>
+    <li><b>Where the truck and trailer park overnight.</b> Zoning has to allow it, it needs a 240 V circuit, and a trailer that smells in August needs some distance from neighbors.</li>
+    <li><b>Same day or alternate weeks?</b> The founding campaign asks customers directly.</li>
+    <li><b>Midday charging at Richmond:</b> the site owner's OK for a brief trailer drop, and the cost per session.</li>
+    <li><b>How the tipper performs:</b> whether tilting the box and a deflector plate keep the trailer filling evenly. We test it during the trailer trial.</li>
+    <li><b>Buying an existing route.</b> Small haulers retire, and routes often sell for ~1–1.5× a year's revenue. Buying 200 customers skips the slowest year.</li>
+    <li><b>LLC or co-op.</b> We talk to the Vermont Employee Ownership Center before setting up the company.</li>
+    <li><b>GPS tracker and billing tools:</b> see the <a href="hardware.html#gps">Hardware</a> and <a href="software.html">Software</a> pages.</li>
+    <li><b>Seasonal demand:</b> bear rules for putting carts out, and a move-out cleanup offer for student rentals.</li>
+  </ol>
+  <p class="small">Permits and licensing are on the <a href="regulatory.html">Regulatory page</a>. Breakdowns, weather and competition are on the <a href="risks.html">Risks page</a>.</p>
+</section>
+
+<section id="next">
+  <h2>First 90 days</h2>
+  <ol class="steps">
+    <li><b>Weeks 1–2: prices and rules.</b> Casella's Williston rate and any per-load minimum, in writing. CSWD's recycling fee and hauler-license requirements. Green Mountain Compost's hauler packet. ANR on cart-size pricing and what counts as "offering" compost and yard waste. Competitors' prices.</li>
+    <li><b>Weeks 2–6: founding campaign.</b> A sign-up page that checks each address against our zones and shows each zone's progress, promoted on Front Porch Forum in two towns first. Every sign-up answers two questions: <em>same day or alternate weeks?</em> and <em>how do you get rid of trash today?</em> Target: 150 reserved, 50 prepaid.</li>
+    <li><b>Weeks 3–6: equipment.</b> Shortlist used Silverado EVs (window sticker, payload, battery report, four-wheel steering, wheel size). Trailer quotes. A tipper fabrication quote that includes the mid-length mount, the deflector, and bracing for a future divider.</li>
+    <li><b>Weeks 4–8: company and money.</b> Form the company (after the co-op conversation). Financing, insurance quotes, a yard with 240 V, permission at the Richmond charger. Try two or three GPS trackers.</li>
+    <li><b>Weeks 6–10: hire and train.</b> A driver and a backup. Dry runs of real routes from the planner, including a full dump cycle and a midday charge.</li>
+    <li><b>Weeks 8–12: launch.</b> USDOT number, state hauler permit, CSWD license, registration. Billing live, carts delivered. Start with the zones at threshold, 1–2 route days a week, and weigh every load to calibrate the planner.</li>
+  </ol>
+</section>
+
+<section id="vehicles">
+  <h2>Appendix: vehicles considered<small>How we got to a pickup and trailer, and what comes later</small></h2>
+<div class="tbl"><table>
+    <thead><tr><th>Vehicle</th><th>Size</th><th>What's good</th><th>What to watch</th><th>When</th></tr></thead>
+    <tbody>
+      <tr><td><b>Silverado EV</b> Work Truck or LT with Max Range battery and Max Tow</td><td>Tows 12,500 lb, ~205 kWh</td><td>The strongest-towing electric pickup. Local Chevy dealers can service it.</td><td>Only 2025+ models. Payload ~1,800–2,100 lb.</td><td><span class="tag">Alternative tow vehicle</span></td></tr>
+      <tr><td><b>GMC Sierra EV</b></td><td>Same as the Silverado</td><td>Same truck mechanically</td><td>Sold in pricier trims</td><td><span class="tag">If cheaper used</span></td></tr>
+      <tr><td><b>F-150 Lightning</b> (extended-range battery)</td><td>Tows 10,000 lb, 131 kWh</td><td>Plenty of used ones. 9.6 kW power outlets in the bed.</td><td>Smaller battery: about 68 stops a day in winter, so ~600–700 customers per truck. ~$15–25k cheaper used.</td><td><span class="tag">Good launch truck</span></td></tr>
+      <tr><td><b>Isuzu NRR-EV</b> with an 8–10 yd compactor body</td><td>Class 5, 19,500 lb max, 60–180 kWh</td><td>No commercial license. Built-in 12 kW power for the compactor. Low rear loading. ~3–4 t per load.</td><td>~$220–280k, close to a full electric garbage truck. More batteries means less trash per load.</td><td><span class="tag warn">Comparison only</span></td></tr>
+      <tr><td><b>Isuzu NRR-EV</b> with a high-side dump body and tipper</td><td>Class 5, 14–16 ft body</td><td>Lighter, cheaper body. ~4 t per load. No trailer to back up.</td><td>~$180–230k, and the same loading-height issue as the trailer</td><td><span class="tag warn">Comparison only</span></td></tr>
+      <tr><td><b>Class 6 electric chassis</b> (Kenworth K270E, Peterbilt 220EV, Freightliner eM2) with a 10–13 yd compactor</td><td>Rated 25,995 lb</td><td>No commercial license at that rating. ~4–5 t per load. 100–200 mi range.</td><td>~$300k+</td><td><span class="tag">Next step, 1,000+ homes</span></td></tr>
+      <tr><td><b>Pickup with a custom body on it</b></td><td>—</td><td>—</td><td>Electric pickups aren't sold as a bare frame to build on, and their payload (1,300–2,100 lb) is less than the body would weigh</td><td><span class="tag no">Not possible</span></td></tr>
+      <tr><td><b>Mack LR Electric</b></td><td>Class 8, 376 kWh</td><td>Most widely used electric garbage truck. Portland, Maine runs one through winter.</td><td>~$450–600k new. Needs a fast charger and a commercial license.</td><td><span class="tag warn">1,500+ homes</span></td></tr>
+      <tr><td><b>Lion8 refuse</b> (used)</td><td>Class 8</td><td>Maker went through creditor protection in 2024, so used ones sell at a discount</td><td>Parts and service are uncertain</td><td><span class="tag warn">Only if very cheap</span></td></tr>
+      <tr><td><b>Towed compactor trailers</b> (Qube, Pro-Pactor)</td><td>Up to ~14,000 lb loaded</td><td>Built to be pulled by a truck</td><td>Too heavy for these pickups. The Pro-Pactor needs a gooseneck or pintle hitch.</td><td><span class="tag no">Doesn't fit</span></td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Cold weather:</b> expect 25–40% less range in single-digit temperatures. Warm the truck before leaving while it's still plugged in, and wash the underbody weekly in salt season. The federal tax credit for commercial clean vehicles ended for vehicles acquired after 30 Sep 2025. Check Drive Electric Vermont, BED and GMP for current state and utility rebates.</p>
+</section>
+
+<section id="diesel">
+  <h2>Appendix: diesel vs electric<small>Running cost per month for the same routes. Miles can come from the routing page or be entered directly.</small></h2>
+  <p>The comparison is a used ¾-ton diesel pickup (Silverado 2500 or F-250 class) pulling the same trailer, versus the electric pickup. Purchase price is left out. Used ¾-ton diesels cost about the same as a used Silverado EV, so the difference is mostly fuel and upkeep.</p>
+  <div class="calc">
+    <div class="inputs">
+      <div class="grp">Route</div>
+      <div class="field"><label for="dzMiles">Miles per month</label><input id="dzMiles" type="number" value="1860" step="50"></div>
+      <div class="field"><label for="dzHours">Route hours per month</label><input id="dzHours" type="number" value="143" step="5"></div>
+      <div class="field"><label for="dzCust">Customers</label><input id="dzCust" type="number" value="600" step="50"></div>
+      <div class="field wide"><button id="dzFromPlan" type="button" class="linkbtn">Use miles and hours from the current routing plan</button><span id="dzPlanNote" class="hint"></span></div>
+      <div class="grp">Electric</div>
+      <div class="field"><label for="dzKwhMi">Towing kWh per mile (summer)</label><input id="dzKwhMi" type="number" value="1.2" step="0.05"></div>
+      <div class="field"><label for="dzWinterPen">Winter penalty (%)</label><input id="dzWinterPen" type="number" value="35" step="5"></div>
+      <div class="field"><label for="dzWinterMonths">Winter months per year</label><input id="dzWinterMonths" type="number" value="4" step="1"></div>
+      <div class="field"><label for="dzHeat">Winter cab heat (kW)</label><input id="dzHeat" type="number" value="4" step="0.5"></div>
+      <div class="field"><label for="dzHome">Home/yard electricity ($/kWh)</label><input id="dzHome" type="number" value="0.19" step="0.01"></div>
+      <div class="field"><label for="dzLoss">Charging losses (%)</label><input id="dzLoss" type="number" value="10" step="1"></div>
+      <div class="field"><label for="dzPublicShare">Share from public fast charging (%)</label><input id="dzPublicShare" type="number" value="15" step="5"><div class="hint">Midday top-ups at Richmond, for example</div></div>
+      <div class="field"><label for="dzPublicPrice">Public fast charging ($/kWh)</label><input id="dzPublicPrice" type="number" value="0.50" step="0.05"></div>
+      <div class="field"><label for="dzEvMaint">EV maintenance ($/mile)</label><input id="dzEvMaint" type="number" value="0.04" step="0.01"><div class="hint">Tires, brakes, cabin filter. No oil or exhaust system.</div></div>
+      <div class="grp">Diesel</div>
+      <div class="field"><label for="dzMpg">Towing mpg on route</label><input id="dzMpg" type="number" value="9" step="0.5"><div class="hint">Stop-and-go with a loaded trailer</div></div>
+      <div class="field"><label for="dzWinterMpg">Winter mpg loss (%)</label><input id="dzWinterMpg" type="number" value="10" step="5"></div>
+      <div class="field"><label for="dzIdleShare">Share of route time idling (%)</label><input id="dzIdleShare" type="number" value="40" step="5"><div class="hint">Engine running at stops and the dump</div></div>
+      <div class="field"><label for="dzIdleGph">Idle burn (gal/hr)</label><input id="dzIdleGph" type="number" value="0.6" step="0.1"></div>
+      <div class="field"><label for="dzDiesel">Diesel ($/gal)</label><input id="dzDiesel" type="number" value="5.00" step="0.05"></div>
+      <div class="field"><label for="dzDef">DEF (% of fuel, at $3.50/gal)</label><input id="dzDef" type="number" value="3" step="0.5"></div>
+      <div class="field"><label for="dzDzMaint">Diesel maintenance ($/mile)</label><input id="dzDzMaint" type="number" value="0.12" step="0.01"><div class="hint">Oil, fuel filters, exhaust system (DPF/DEF), more brake wear</div></div>
+    </div>
+    <div class="outputs" aria-live="polite">
+      <div class="kpis">
+        <div class="kpi"><span>Electric / mo</span><strong id="dzEv">–</strong></div>
+        <div class="kpi"><span>Diesel / mo</span><strong id="dzDz">–</strong></div>
+        <div class="kpi"><span>Electric saves / yr</span><strong id="dzSave">–</strong><em id="dzPer"></em></div>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>Per month</th><th class="n">Electric</th><th class="n">Diesel</th></tr></thead>
+        <tbody id="dzRows"></tbody>
+      </table></div>
+      <p class="small">Estimates, not quotes. Electricity: yearly average including winter losses and cab heat, with home charging losses added. Diesel: route mpg with the winter loss, plus idling. The maintenance rates per mile are rough rules of thumb. Replace them with real service records once we have them.</p>
+      <h3>What the numbers leave out</h3>
+      <ul class="list">
+        <li><b>For diesel:</b> more payload (~2,500–3,500 lb) and towing (13–18k lb), no range limit, and no midday charging to plan around.</li>
+        <li><b>For electric:</b> quiet (the brand), no idling fumes at customers' houses, bed outlets that run the tipper, and simpler upkeep.</li>
+        <li><b>CDL check:</b> a ¾-ton diesel is rated ~10,000–11,500 lb. With Trailer B (14,000) that's ~24,000–25,500, still under 26,001. A 1-ton rated 12,001 lb or more with Trailer B needs a Class A CDL.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <b>Sources and notes</b>
+  <ul>
+    <li>Truck: Silverado EV RST specs (10,000 lb towing, up to 1,500 lb payload, 440 mi): <a href="https://news.chevrolet.com/newsroom.detail.html/Pages/news/us/en/2024/may/0513-silveradoev.html">Chevrolet newsroom</a>. 12,500 lb towing on 2026 models: <a href="https://www.umanskychevrolet.com/research-2026-chevrolet-silverado-ev/">dealer research page</a>.</li>
+    <li>Trailers: <a href="https://www.newlinetrailer.com/product-page/2023-griffin-dump-trailer-7x14-4-sides-powder-coated-14-000lb-gvwr">Griffin 7×14</a>, <a href="https://allamericantrailer.com/product/big-tex-low-profile-7x14-dump-trailer-14lp-14/">Big Tex 14LP-14-P4</a>. Tipper: <a href="https://www.baynethinline.com/products/mobile-refuse-products/grl-1110-cart-lifter">Bayne GRL 1110</a>. Compactor trailers: <a href="https://www.qubewastesolutions.com/qube-trailer">Qube</a>, <a href="https://protainer.com/product/pro-pactor-compactor-trailers/">Pro-Pactor</a>.</li>
+    <li>Dumping: <a href="https://www.vermontbusinessregistry.com/bidAttachments/72252/Addendum%201_RFP%2020260126.pdf">2026 bid listing Williston at $125/ton</a>. <a href="https://www.casella.com/locations/transfer-stations/williston-vt-transfer/">Casella Williston</a>. <a href="https://cswd.net/cswd-facilities/">CSWD facilities</a>.</li>
+    <li>Garbage trucks: <a href="https://www.batterytechonline.com/battery-applications/mack-s-new-electric-refuse-trucks-offer-more-range-and-capacity">Mack LR Electric</a>, <a href="https://www.truckinginfo.com/news/maine-first-electric-refuse-truck-is-a-mack-lr-electric">Portland, Maine</a>, <a href="https://www.emobility-engineering.com/lion8-refuse-truck/">Lion8</a>, <a href="https://www.isuzucv.com/pdfs/2026_NRR_EV_Brochure.pdf">Isuzu NRR-EV brochure</a>, <a href="https://www.truckinginfo.com/10159506/driving-kenworths-electric-trucks">Kenworth electric trucks</a>.</li>
+    <li>These are estimates, not quotes: energy per mile, tipper and mounting costs, insurance, and what customer lists sell for. Confirm each before committing money.</li>
+  </ul>
+</footer>
+</main>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const ids=["cust","price","lbs","truckpay","load","kwhmi","kwh","miles","charger","tip","stops","owner","crew","wage","ins","other","reclbs","recfee"];
+  const VISITS = {sameday: 2, alternate: 2, split: 1.3, none: 1}; // route-day multiplier from recycling
+  const PRESETS = {
+    sil:   {truckpay:1700, load:1.75, kwhmi:1.2, miles:40, charger:600,  stops:100, ins:900,  other:1200},
+    f150:  {truckpay:1350, load:1.75, kwhmi:1.3, miles:40, charger:600,  stops:90,  ins:900,  other:1200},
+    nrrpack:{truckpay:4400, load:3.5, kwhmi:1.4, miles:40, charger:900,  stops:175, ins:1400, other:1400},
+    nrrdump:{truckpay:3600, load:4,   kwhmi:1.3, miles:40, charger:900,  stops:120, ins:1300, other:1300},
+    c6:    {truckpay:5300, load:4.5, kwhmi:2.0, miles:45, charger:2200, stops:225, ins:1800, other:1600},
+    mack:  {truckpay:9000, load:9,   kwhmi:3.0, miles:45, charger:2500, stops:250, ins:2000, other:1800},
+    diesel:{truckpay:2200, load:9,   kwhmi:0,   miles:45, charger:1200, stops:250, ins:1800, other:2200}
+  };
+  const fmt = n => (n<0?"−$":"$")+Math.round(Math.abs(n)).toLocaleString();
+  const PICKUPS = 26/12, WORKDAYS = 21.7, TIPMILES = 16;
+
+  function model(v, cust){
+    const rev = cust*v.price;
+    const stopsMo = cust*PICKUPS;
+    const rec = $("recmode").value;
+    const days = v.stops>0 ? stopsMo*VISITS[rec]/v.stops : 0;
+    const tonsDay = v.stops*v.lbs/2000;
+    const runs = v.load>0 ? Math.max(1, Math.ceil(tonsDay/v.load)) : 1;
+    const milesDay = v.miles + runs*TIPMILES;
+    const tons = stopsMo*v.lbs/2000;
+    const recTons = rec==="none" ? 0 : stopsMo*v.reclbs/2000;
+    const disposal = tons*v.tip + recTons*v.recfee;
+    const energy = v.kwhmi>0 ? days*milesDay*v.kwhmi*v.kwh : days*milesDay/3.5*5.00;
+    const crew = days*9*v.wage*1.35*v.crew;
+    const fees = rev*0.03;
+    const lines = [
+      ["Equipment payment", v.truckpay, ""],
+      ["Owner salary", v.owner/12, "b"],
+      ["Disposal", disposal, "c"],
+      ["Parking + charging", v.charger, ""],
+      ["Insurance", v.ins, "b"],
+      ["Maint./software/mktg", v.other, "b"],
+      ["Driver", crew, "b"],
+      ["Card fees", fees, "b"],
+      [v.kwhmi>0?"Electricity":"Diesel", energy, "c"]
+    ];
+    const cost = lines.reduce((a,l)=>a+l[1],0);
+    return {rev,cost,profit:rev-cost,days,tonsDay,runs,milesDay,lines,stopsMo,crew,truckpay:v.truckpay};
+  }
+  function read(){const v={};ids.forEach(k=>v[k]=parseFloat($(k).value)||0);return v;}
+  function breakeven(v){ for(let c=0;c<=6000;c+=10){ if(model(v,c).profit>=0) return c; } return null; }
+  function bar(label, pct, cls, val){
+    return `<div class="bar"><span>${label}</span><span class="track"><i class="${cls}" style="width:${Math.max(0,Math.min(pct,100)).toFixed(1)}%"></i></span><span class="n">${val}</span></div>`;
+  }
+  function render(){
+    const v=read(), m=model(v,v.cust);
+    $("oRev").textContent=fmt(m.rev);
+    $("oCost").textContent=fmt(m.cost);
+    const p=$("oProfit"); p.textContent=fmt(m.profit); p.className=m.profit>=0?"pos":"neg";
+    $("oMargin").textContent = m.rev>0 ? Math.round(m.profit/m.rev*100)+"% margin" : "";
+    const be=breakeven(v); $("oBE").textContent = be===null?"6,000+":be.toLocaleString();
+
+    const max=Math.max(...m.lines.map(l=>l[1]),1);
+    $("costBars").innerHTML = m.lines.slice().sort((a,b)=>b[1]-a[1]).map(l=>bar(l[0], l[1]/max*100, l[2], fmt(l[1]))).join("");
+
+    const cap = Math.floor(v.stops*10/VISITS[$("recmode").value]);
+    const perWeek = m.days/ (WORKDAYS/5);
+    $("opsBars").innerHTML =
+      bar("Route days", m.days/WORKDAYS*100, "", `${m.days.toFixed(1)}/mo`) +
+      bar("Customers vs capacity", cap? v.cust/cap*100:0, "b", `${v.cust.toLocaleString()} / ${cap.toLocaleString()}`) +
+      bar("Dump runs per day", m.runs/4*100, "c", `${m.runs} × ${v.load} t`) +
+      `<p class="small" style="margin:4px 0 0">${m.days.toFixed(1)} route days a month is about ${perWeek.toFixed(1)} a week out of 5. Each route day collects ${m.tonsDay.toFixed(1)} tons and drives about ${Math.round(m.milesDay)} miles, including Williston runs. Capacity assumes every-other-week service: one setup can run 10 route days per two-week cycle, shared with recycling days.</p>`;
+
+    window.QR = {model: (c) => model(read(), c), inputs: read};
+    document.dispatchEvent(new CustomEvent("qr:update"));
+    $("scen").querySelector("tbody").innerHTML=[100,200,400,700,1000].map(c=>{const s=model(v,c);
+      return `<tr><td>${c.toLocaleString()}</td><td class="n">${(s.days/(WORKDAYS/5)).toFixed(1)}</td><td class="n">${fmt(s.rev)}</td><td class="n" style="color:var(${s.profit>=0?"--good":"--bad"})">${fmt(s.profit)}</td></tr>`;}).join("");
+  }
+  $("rigsel").addEventListener("change",e=>{
+    const p=PRESETS[e.target.value]; Object.keys(p).forEach(k=>$(k).value=p[k]); render();
+  });
+  ids.forEach(k=>$(k).addEventListener("input",render));
+  $("recmode").addEventListener("change",render);
+  render();
+})();
+</script>
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const ids = ["dzMiles", "dzHours", "dzCust", "dzKwhMi", "dzWinterPen", "dzWinterMonths", "dzHeat", "dzHome", "dzLoss",
+    "dzPublicShare", "dzPublicPrice", "dzEvMaint", "dzMpg", "dzWinterMpg", "dzIdleShare", "dzIdleGph", "dzDiesel", "dzDef", "dzDzMaint"];
+  const money = (n) => "$" + Math.round(n).toLocaleString();
+  function calc() {
+    const v = {}; ids.forEach((k) => (v[k] = parseFloat($(k).value) || 0));
+    const winter = v.dzWinterMonths / 12;
+    // Electric: energy at the truck, then what we buy from the grid or a public charger.
+    const kwhDrive = v.dzMiles * v.dzKwhMi * (1 + (v.dzWinterPen / 100) * winter);
+    const kwhHeat = v.dzHeat * v.dzHours * winter;
+    const kwhTruck = kwhDrive + kwhHeat;
+    const pub = v.dzPublicShare / 100;
+    const homeCost = (kwhTruck * (1 - pub)) / (1 - v.dzLoss / 100) * v.dzHome;
+    const pubCost = kwhTruck * pub * v.dzPublicPrice;
+    const evMaint = v.dzMiles * v.dzEvMaint;
+    // Diesel: driving fuel with a winter mpg loss, plus idling.
+    const mpg = v.dzMpg * (1 - (v.dzWinterMpg / 100) * winter);
+    const gal = (mpg > 0 ? v.dzMiles / mpg : 0) + v.dzHours * (v.dzIdleShare / 100) * v.dzIdleGph;
+    const fuel = gal * v.dzDiesel;
+    const def = gal * (v.dzDef / 100) * 3.5;
+    const dzMaint = v.dzMiles * v.dzDzMaint;
+    const ev = homeCost + pubCost + evMaint, dz = fuel + def + dzMaint;
+    $("dzEv").textContent = money(ev);
+    $("dzDz").textContent = money(dz);
+    const save = (dz - ev) * 12;
+    $("dzSave").textContent = (save < 0 ? "−" : "") + money(Math.abs(save));
+    $("dzSave").className = save >= 0 ? "pos" : "neg";
+    $("dzPer").textContent = v.dzCust > 0 ? `$${((dz - ev) / v.dzCust).toFixed(2)} per customer per month` : "";
+    $("dzRows").innerHTML = [
+      ["Energy: home/yard charging", homeCost, null],
+      ["Energy: public fast charging", pubCost, null],
+      [`Diesel fuel (${Math.round(gal)} gal, incl. idling)`, null, fuel],
+      ["DEF", null, def],
+      ["Maintenance", evMaint, dzMaint],
+      ["<b>Total</b>", ev, dz],
+    ].map(([l, a, b]) => `<tr><td>${l}</td><td class="n">${a === null ? "—" : money(a)}</td><td class="n">${b === null ? "—" : money(b)}</td></tr>`).join("") +
+      `<tr><td class="small">Energy used</td><td class="n small">${Math.round(kwhTruck).toLocaleString()} kWh</td><td class="n small">${Math.round(gal)} gal</td></tr>`;
+  }
+  ids.forEach((k) => $(k).addEventListener("input", calc));
+  $("dzFromPlan").addEventListener("click", async () => {
+    try {
+      const p = await (await fetch("/api/plan")).json();
+      const perMonth = 30.4 / 14; // the plan covers a two-week cycle
+      $("dzMiles").value = Math.round(p.days.reduce((a, d) => a + d.miles, 0) * perMonth);
+      $("dzHours").value = Math.round(p.days.reduce((a, d) => a + d.total_min, 0) / 60 * perMonth);
+      $("dzCust").value = p.customers;
+      $("dzPlanNote").textContent = `From the routing plan: ${p.customers} customers, recycling mode "${p.config.recycling}".`;
+      calc();
+    } catch (e) {
+      $("dzPlanNote").textContent = "Couldn't load the routing plan. Is the planner server running?";
+    }
+  });
+  calc();
+})();
+</script>
+</body>
+</html>

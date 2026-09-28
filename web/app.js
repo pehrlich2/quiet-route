@@ -1,7 +1,8 @@
 const COLORS = ["#1b7f5e", "#d1495b", "#2f6fb2", "#e0a100", "#7b4fb3", "#1a9fb0", "#c2562c", "#5f8f1f", "#b83f8f", "#44546a"];
 const $ = (id) => document.getElementById(id);
-const PLAN_FIELDS = ["customers", "adoption", "assign", "lbs_per_stop", "load_lbs", "stop_min", "dump_min", "seed"];
-const ENERGY_FIELDS = ["battery", "reserve", "kwhmi", "winterPen", "heatKw", "tipKwh", "workHrs"];
+const PLAN_FIELDS = ["customers", "adoption", "assign", "recycling", "lbs_per_stop", "load_lbs", "recycle_lbs", "recycle_load_lbs", "split_trash_pct", "stop_min", "dump_min", "seed"];
+const STREAM_LABEL = { trash: "trash", recycling: "recycling", both: "trash + recycling, split trailer", sameday: "trash, then recycling" };
+const ENERGY_FIELDS = ["battery", "reserve", "kwhmi", "winterPen", "heatKw", "tipKwh", "workHrs", "charges", "chargeMin", "chargeKw"];
 
 let plan = null;
 let focus = null; // index of the highlighted day, or null for all
@@ -22,39 +23,63 @@ function energyInputs() {
   v.winter = document.querySelector("input[name=season]:checked").value === "winter";
   v.usable = v.battery * (1 - v.reserve / 100);
   v.driveKwhMi = v.kwhmi * (v.winter ? 1 + v.winterPen / 100 : 1);
+  // Energy a midday fast charge adds: charger power x time, ~90% efficient, capped at a full battery.
+  v.midday = v.charges > 1 ? Math.min(v.usable, (v.chargeKw * v.chargeMin) / 60 * 0.9) : 0;
+  v.allowed = (v.usable + v.midday) / v.usable; // day energy limit, as a share of one charge
   return v;
 }
 
+const passesOf = (d) => d.passes || [d];
+
 function dayEnergy(d, e) {
   const heat = e.winter ? e.heatKw * (d.total_min / 60) : 0;
-  return d.miles * e.driveKwhMi + d.stops.length * e.tipKwh + heat;
+  return d.miles * e.driveKwhMi + d.stops.length * passesOf(d).length * e.tipKwh + heat;
 }
 
-// How many stops this day's pattern could reach before running out of hours or battery.
+// Charges this day needs (1 = overnight only), capped at what the settings allow.
+const needsMidday = (kwh, e) => e.charges > 1 && kwh > e.usable;
+const dayMinutes = (d, e) => d.total_min + (needsMidday(dayEnergy(d, e), e) ? e.chargeMin : 0);
+
+// How many houses this day's pattern could serve before running out of hours or battery.
+// A day can have several passes over the same houses (trash, then recycling).
 function dayCapacity(d, e, cfg) {
   const n = d.stops.length;
   if (!n) return { time: 0, battery: 0 };
-  const transitMi = d.miles - d.collect_miles;
-  const transitPerLoad = transitMi / d.dump_runs;
-  const transitMinPerLoad = (d.drive_min * transitMi) / d.miles / d.dump_runs;
-  const collectMinPerStop = (d.drive_min * d.collect_miles) / d.miles / n;
-  const collectMiPerStop = d.collect_miles / n;
-  const perLoadStops = Math.max(1, Math.floor(cfg.load_lbs / cfg.lbs_per_stop));
+  const passes = passesOf(d).map((p) => {
+    const transitMi = p.miles - p.collect_miles;
+    return {
+      perLoad: Math.max(1, p.stops_per_load ?? Math.floor(cfg.load_lbs / cfg.lbs_per_stop)),
+      stopMin: p.stop_min ?? cfg.stop_min,
+      dumpMin: p.dump_min ?? cfg.dump_min,
+      collectMiPerStop: p.collect_miles / n,
+      collectMinPerStop: (p.drive_min * p.collect_miles) / p.miles / n,
+      transitMiPerLoad: transitMi / p.dump_runs,
+      transitMinPerLoad: (p.drive_min * transitMi) / p.miles / p.dump_runs,
+    };
+  });
+  const cost = (s) => {
+    let minutes = 0, miles = 0;
+    for (const p of passes) {
+      const loads = Math.ceil(s / p.perLoad);
+      minutes += s * (p.stopMin + p.collectMinPerStop) + loads * (p.dumpMin + p.transitMinPerLoad);
+      miles += s * p.collectMiPerStop + loads * p.transitMiPerLoad;
+    }
+    const heat = e.winter ? e.heatKw * (minutes / 60) : 0;
+    const kwh = miles * e.driveKwhMi + s * passes.length * e.tipKwh + heat;
+    return { minutes: minutes + (needsMidday(kwh, e) ? e.chargeMin : 0), kwh };
+  };
   const work = e.workHrs * 60;
   const fits = (s, kind) => {
-    const loads = Math.ceil(s / perLoadStops);
-    const minutes = s * (cfg.stop_min + collectMinPerStop) + loads * (cfg.dump_min + transitMinPerLoad);
-    if (kind === "time") return minutes <= work;
-    const heat = e.winter ? e.heatKw * (minutes / 60) : 0;
-    const kwh = (s * collectMiPerStop + loads * transitPerLoad) * e.driveKwhMi + s * e.tipKwh + heat;
-    return kwh <= e.usable;
+    const c = cost(s);
+    return kind === "time" ? c.minutes <= work : c.kwh <= e.usable + e.midday;
   };
-  const search = (kind) => { let s = 0; while (s < 2000 && fits(s + 1, kind)) s++; return s; };
+  const search = (kind) => { let s = 0; while (s < 3000 && fits(s + 1, kind)) s++; return s; };
   return { time: search("time"), battery: search("battery") };
 }
 
 const median = (xs) => { const s = [...xs].sort((a, b) => a - b); return s.length ? s[Math.floor(s.length / 2)] : 0; };
-const pctClass = (p) => (p > 1 ? "bad" : p > 0.85 ? "warn" : "ok");
+// p is energy as a share of one charge; allowed = charges per day in the settings.
+const pctClass = (p, allowed = 1) => (p > allowed ? "bad" : p > 0.85 ? "warn" : "ok");
 
 // ---------- rendering ----------
 
@@ -85,10 +110,13 @@ function renderMap() {
         .addTo(routeLayer);
     }));
   });
-  const dump = plan.config.dump;
-  L.circleMarker(dump, { radius: 9, color: "#15211D", weight: 2, fillColor: "#e0a100", fillOpacity: 1 })
-    .bindTooltip("Williston transfer station (dump)").addTo(routeLayer);
-  bounds.push(dump);
+  const c = plan.config;
+  const facility = (pt, label, fill) => pt && L.circleMarker(pt, { radius: 8, color: "#15211D", weight: 2, fillColor: fill, fillOpacity: 1 })
+    .bindTooltip(label).addTo(routeLayer);
+  facility(c.dump, "Casella transfer station (trash), 262 Avenue B<br>Mon–Fri 7:30–4, Sat 7–1", "#e0a100");
+  facility(c.recycle_dump, "CSWD recycling facility, 357 Avenue C<br>Mon–Fri 6–3", "#2f6fb2");
+  facility(c.compost_site, "Green Mountain Compost, 1042 Redmond Rd<br>(compost routes not modeled yet)", "#5f8f1f");
+  bounds.push(c.dump);
   if (bounds.length > 1) map.fitBounds(bounds, { padding: [30, 30] });
 }
 
@@ -100,9 +128,9 @@ function renderTable() {
     const p = dayEnergy(d, e) / e.usable;
     const tr = document.createElement("tr");
     if (focus === i) tr.className = "sel";
-    tr.innerHTML = `<td class="day"><span class="sw" style="background:${COLORS[i % COLORS.length]}"></span>${d.label}<small>${d.towns.join(", ")}</small></td>
+    tr.innerHTML = `<td class="day"><span class="sw" style="background:${COLORS[i % COLORS.length]}"></span>${d.label}<small>${d.towns.join(", ")} · ${STREAM_LABEL[d.stream] || "trash"}</small></td>
       <td class="n">${d.stops.length}</td><td class="n">${d.miles.toFixed(1)}</td><td class="n">${d.dump_runs}</td>
-      <td class="n">${(d.total_min / 60).toFixed(1)}</td><td class="n"><span class="pct ${pctClass(p)}">${Math.round(p * 100)}%</span></td>`;
+      <td class="n">${(dayMinutes(d, e) / 60).toFixed(1)}</td><td class="n"><span class="pct ${pctClass(p, e.allowed)}" title="${Math.round(dayEnergy(d, e))} kWh; one charge = ${Math.round(e.usable)} kWh usable${p > 1 ? (p <= e.allowed ? `. Needs the midday charge (+${Math.round(e.midday)} kWh, included in hours).` : ". More than the battery plus any midday charge can supply.") : ""}">${Math.round(p * 100)}%</span></td>`;
     tr.addEventListener("click", () => { focus = focus === i ? null : i; renderAll(false); });
     tbody.appendChild(tr);
   });
@@ -121,14 +149,21 @@ function renderSummary() {
   const tile = (label, value, sub = "") => `<div class="tile"><span>${label}</span><b>${value}</b>${sub ? `<em>${sub}</em>` : ""}</div>`;
   $("tiles").innerHTML =
     tile("Customers", plan.customers.toLocaleString(), `${days.length} service days`) +
-    tile("Stops per day", Math.round(plan.customers / days.length), "average") +
+    tile("Stops per day", Math.round(days.reduce((a, d) => a + d.stops.length, 0) / days.length), "average") +
     tile("Miles per 2 weeks", Math.round(totalMi).toLocaleString(), `${(totalMi / days.length).toFixed(0)} per day avg`) +
-    tile("Hardest day battery", `<span class="pct ${pctClass(worst)}">${Math.round(worst * 100)}%</span>`, `of usable, ${e.winter ? "winter" : "summer"}`) +
+    tile("Hardest day battery", `<span class="pct ${pctClass(worst, e.allowed)}">${Math.round(worst * 100)}%</span>`, `of one charge, ${e.winter ? "winter" : "summer"}${e.charges > 1 ? `, +${Math.round(e.midday)} kWh midday` : ""}`) +
     tile("Max stops / day", limit.toLocaleString(), capTime <= capBatt ? "limited by hours" : "limited by battery") +
-    tile("Max customers", (limit * days.length).toLocaleString(), "at this density, every other week");
+    tile("Max customers", Math.round(limit * days.length / (plan.visits_per_customer || 1)).toLocaleString(), visitsNote(plan));
   $("capNote").textContent =
     `Max stops is an estimate: it scales each day's actual stop spacing and Williston runs up until the ${e.workHrs}-hour day ` +
-    `(${capTime} stops) or the ${Math.round(e.usable)} kWh usable battery (${capBatt} stops) runs out. Median across days.`;
+    `(${capTime} houses) or the battery runs out: ${e.charges > 1 ? `${Math.round(e.usable)} kWh overnight plus ${Math.round(e.midday)} kWh from a ${e.chargeMin}-min midday charge at ${e.chargeKw} kW` : `one ${Math.round(e.usable)} kWh overnight charge`} (${capBatt} houses). Median across days.`;
+}
+
+function visitsNote(p) {
+  const m = p.config.recycling;
+  if (m === "alternate") return "trash + alternate-week recycling";
+  if (m === "both") return "both carts per visit, every other week";
+  return "trash only, every other week";
 }
 
 function renderAll(refit = true) {
@@ -191,6 +226,21 @@ const renderNumbers = () => { if (plan) { renderSummary(); renderTable(); } };
 ENERGY_FIELDS.forEach((k) => $(k).addEventListener("input", renderNumbers));
 document.querySelectorAll("input[name=season]").forEach((r) => r.addEventListener("change", renderNumbers));
 $("showHomes").addEventListener("change", renderHomes);
+
+// ---------- fast chargers ----------
+const chargerLayer = L.layerGroup();
+function renderChargers(list) {
+  chargerLayer.clearLayers();
+  list.forEach((ch) => {
+    const html = `<b>${ch.name}</b>${ch.operator !== ch.name ? ` · ${ch.operator}` : ""}<br>` +
+      `${ch.plugs.join(", ") || "plug type unknown"}${ch.stalls ? ` · ${ch.stalls} stalls` : ""}${ch.kw ? ` · ${ch.kw} kW` : ""}` +
+      `${ch.note ? `<br>${ch.note}` : ""}<br><i>Trailer fit unknown: check whether stalls are pull-through.</i>`;
+    L.marker([ch.lat, ch.lon], {
+      icon: L.divIcon({ className: "charger-icon", html: "⚡", iconSize: [20, 20], iconAnchor: [10, 10] }),
+    }).bindTooltip(html).addTo(chargerLayer);
+  });
+}
+$("showChargers").addEventListener("change", (ev) => (ev.target.checked ? chargerLayer.addTo(map) : chargerLayer.remove()));
 $("showAll").addEventListener("click", () => { focus = null; renderAll(false); });
 
 (async function init() {
@@ -200,6 +250,10 @@ $("showAll").addEventListener("click", () => { focus = null; renderAll(false); }
     fetch("/api/plan").then((r) => r.json()),
     fetch("/data/addresses.json").then((r) => r.json()),
   ]);
+  fetch("/data/chargers.json").then((r) => (r.ok ? r.json() : [])).then((list) => {
+    renderChargers(list);
+    if ($("showChargers").checked) chargerLayer.addTo(map);
+  }).catch(() => {});
   addresses = addr;
   plan = p;
   fillForm(plan.config, towns.towns);

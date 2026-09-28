@@ -29,7 +29,18 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         if self.path in ("/", "/index.html"):
-            self.path = "/web/index.html"
+            # Redirect so relative links between pages resolve under /web/.
+            self.send_response(302)
+            self.send_header("Location", "/web/index.html")
+            self.end_headers()
+            return
+        elif self.path.rstrip("/") == "/petertaxes":
+            self.send_response(302)
+            self.send_header("Location", "/web/petertaxes.html")
+            self.end_headers()
+            return
+        elif self.path == "/favicon.ico":
+            self.path = "/web/favicon.svg"
         elif self.path == "/api/plan":
             if not PLAN.exists():
                 with _lock:

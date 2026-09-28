@@ -3,71 +3,45 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quiet Route Planner</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="/web/style.css">
+<link rel="icon" href="/web/favicon.svg" type="image/svg+xml">
+<title>Quiet Route Hauling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
-<aside id="side">
-  <header>
-    <div class="eyebrow">Quiet Route Hauling</div>
-    <h1>Route planner</h1>
+<nav class="sitenav" aria-label="Site"><a class="brand" href="index.html" aria-current="page">Quiet Route</a><a href="plan.html">Business plan</a><a href="hardware.html">Hardware</a><a href="software.html">Software</a><a href="policies.html">Policies</a><a href="regulatory.html">Regulatory</a><a href="risks.html">Risks</a><a href="routing.html">Routing</a></nav>
+<main class="single">
+  <header class="hero">
+    <div class="eyebrow">Company plan · Chittenden County, Vermont</div>
+    <h1>Quiet Route Hauling</h1>
+    <p class="lede">Electric trash, recycling and compost pickup for Jericho, Essex, Hinesburg, Richmond and nearby towns. It launches with a used electric pickup and a dump trailer, is funded by a founding-member campaign, and plans real routes from real addresses.</p>
   </header>
 
-  <section>
-    <h2>Customers</h2>
-    <form id="planForm">
-      <div class="row"><label for="customers">Customers</label><input id="customers" type="number" min="10" max="4000" step="10"></div>
-      <fieldset id="towns"><legend>Towns</legend></fieldset>
-      <div class="row"><label for="adoption">Sign-up pattern</label>
-        <select id="adoption"><option value="uniform">Scattered</option><option value="clustered">Clustered (word of mouth)</option></select></div>
-      <div class="row"><label for="assign">Day split</label>
-        <select id="assign"><option value="town">One town per day</option><option value="sweep">Pie slices around Williston</option></select></div>
-      <div class="row"><label for="lbs_per_stop">Lb per pickup</label><input id="lbs_per_stop" type="number" step="5"></div>
-      <div class="row"><label for="load_lbs">Trailer load (lb)</label><input id="load_lbs" type="number" step="250"></div>
-      <div class="row"><label for="stop_min">Minutes per stop</label><input id="stop_min" type="number" step="0.25"></div>
-      <div class="row"><label for="dump_min">Minutes at dump</label><input id="dump_min" type="number" step="5"></div>
-      <div class="row"><label for="seed">Random seed</label><input id="seed" type="number" step="1"></div>
-      <button id="solveBtn" type="submit">Re-plan routes</button>
-      <div id="status" class="status" role="status"></div>
-    </form>
-  </section>
+  <div class="cards">
+    <a class="card" href="plan.html"><b>Business plan</b><span>Costs and a live cost calculator, pricing, composting, fundraising, when to commit, and what the company is worth.</span></a>
+    <a class="card" href="routing.html"><b>Routing</b><span>Map of real E911 addresses. Plans every-other-week routes with Williston dump runs, and checks summer and winter battery range.</span></a>
+    <a class="card" href="hardware.html"><b>Hardware</b><span>Tow vehicle, the two trailer sizes and how to choose, the cart tipper (with drawings), GPS trackers and carts.</span></a>
+    <a class="card" href="software.html"><b>Software</b><span>Live truck map, pickup notifications, and sign-up and billing built on Stripe.</span></a>
+    <a class="card" href="policies.html"><b>Policies</b><span>What we take and don't, where carts go, missed pickups, our guarantee, billing and contamination.</span></a>
+    <a class="card" href="regulatory.html"><b>Regulatory</b><span>USDOT, medical card, hours records, the CDL line, Vermont's hauler permit and recycling law, CSWD license, pricing rules.</span></a>
+    <a class="card" href="risks.html"><b>Risks</b><span>Truck or trailer out of service, snow days, sick drivers, competition, and who to learn from.</span></a>
+  </div>
 
   <section>
-    <h2>Battery</h2>
-    <div class="seg" role="radiogroup" aria-label="Season">
-      <input type="radio" name="season" id="sSummer" value="summer"><label for="sSummer">Summer</label>
-      <input type="radio" name="season" id="sWinter" value="winter" checked><label for="sWinter">Winter</label>
-    </div>
-    <div class="row"><label for="battery">Battery (kWh)</label><input id="battery" type="number" value="200" step="5"></div>
-    <div class="row"><label for="reserve">Keep in reserve (%)</label><input id="reserve" type="number" value="15" step="5"></div>
-    <div class="row"><label for="kwhmi">Towing kWh / mile</label><input id="kwhmi" type="number" value="1.2" step="0.05"></div>
-    <div class="row"><label for="winterPen">Winter driving penalty (%)</label><input id="winterPen" type="number" value="35" step="5"></div>
-    <div class="row"><label for="heatKw">Winter cab heat (kW)</label><input id="heatKw" type="number" value="4" step="0.5"></div>
-    <div class="row"><label for="tipKwh">Tipper kWh / stop</label><input id="tipKwh" type="number" value="0.03" step="0.01"></div>
-    <div class="row"><label for="workHrs">Workday (hours)</label><input id="workHrs" type="number" value="9" step="0.5"></div>
-  </section>
-
-  <section>
-    <h2>Summary</h2>
-    <div id="tiles" class="tiles"></div>
-    <p id="capNote" class="note"></p>
-  </section>
-
-  <section>
-    <h2>Service days <button id="showAll" class="link" type="button">show all</button></h2>
-    <div class="tblwrap"><table id="days">
-      <thead><tr><th>Day</th><th class="n">Stops</th><th class="n">Miles</th><th class="n">Loads</th><th class="n">Hours</th><th class="n">Battery</th></tr></thead>
-      <tbody></tbody>
+    <h2>Numbers so far</h2>
+    <div class="tbl"><table>
+      <tbody>
+        <tr><td>Launch equipment, all in</td><td class="n">~$80–95k</td></tr>
+        <tr><td>Break-even (hired driver, recycling included)</td><td class="n">~200 customers</td></tr>
+        <tr><td>Buy equipment at</td><td class="n">~150 reserved, ~50 prepaid</td></tr>
+        <tr><td>Customers per truck, both carts on the same day (winter)</td><td class="n">~550–585 overnight charge only<br>~680–800 with a midday charge</td></tr>
+        <tr><td>Customers per truck, future split trailer</td><td class="n">~700–1,000</td></tr>
+        <tr><td>Residential addresses in the four towns</td><td class="n">9,725</td></tr>
+      </tbody>
     </table></div>
-    <label class="check"><input id="showHomes" type="checkbox" checked> Show all homes (gray)</label>
+    <p class="small">All figures are planning estimates. See each page for sources and assumptions.</p>
   </section>
-
-  <footer>Addresses: Vermont E911 address points (VCGI). Roads: © OpenStreetMap contributors. Routing: OR-Tools.</footer>
-</aside>
-<main id="map"></main>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="/web/app.js"></script>
+</main>
 </body>
 </html>

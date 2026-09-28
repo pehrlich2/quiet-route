@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/web/favicon.svg" type="image/svg+xml">
+<title>Quiet Route Software</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:18px 0}
+.flow .step{flex:1 1 150px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-size:13.5px}
+.flow .step b{display:block;font:750 15px/1.2 var(--display);font-stretch:90%;color:var(--spruce);margin-bottom:4px}
+.flow .arrow{align-self:center;color:var(--volt);font-weight:700}
+@media (max-width:640px){.flow .arrow{display:none}}
+</style>
+</head>
+<body>
+<nav class="sitenav" aria-label="Site"><a class="brand" href="index.html">Quiet Route</a><a href="plan.html">Business plan</a><a href="hardware.html">Hardware</a><a href="software.html" aria-current="page">Software</a><a href="policies.html">Policies</a><a href="regulatory.html">Regulatory</a><a href="risks.html">Risks</a><a href="routing.html">Routing</a></nav>
+
+<div class="wrap">
+<nav class="toc" aria-label="Sections">
+  <b>Software</b>
+  <a href="#tracking">Live truck tracking</a>
+  <a href="#notify">Notifications</a>
+  <a href="#billing">Sign-up &amp; billing</a>
+  <a href="#build">Build it with AI?</a>
+  <a href="#phases">Build order</a>
+</nav>
+
+<main>
+<header class="top">
+  <div class="eyebrow">Software</div>
+  <h1>The truck on your phone</h1>
+  <p class="lede">Big haulers give customers a phone number and a pickup window. We can show customers the actual truck, tell them when it's close, and confirm when their cart has been emptied, using a $10/month tracker and the routes we already plan. Sign-up and billing are built on Stripe, so we never handle card numbers ourselves.</p>
+</header>
+
+<section id="tracking">
+  <h2>Live truck tracking<small>From tracker to a customer's phone</small></h2>
+  <div class="flow" aria-label="Data flow">
+    <div class="step"><b>Tracker</b>Bouncie or Teltonika in the truck sends a GPS position every few seconds while driving</div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="step"><b>Our server</b>Receives each position through a webhook and matches it to today's planned stop order from the routing planner</div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="step"><b>ETA + events</b>Estimates arrival at each remaining stop. Marks a stop done when the truck stops within ~40 m and then leaves.</div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="step"><b>Customer</b>Sees a live map and gets "15 minutes away" and "Picked up" messages</div>
+  </div>
+  <ul class="list">
+    <li><b>Route-day map:</b> the truck's position (delayed ~1 minute) and "you're stop 12 of 34." Hidden when the truck is off route or at the yard, for safety and privacy.</li>
+    <li><b>Never show other customers' addresses.</b> A customer sees only the truck and their own place in line.</li>
+    <li><b>Driver buttons:</b> a phone mounted in the cab with the day's stop list. Stops are marked automatically from GPS. One tap for "cart not out" takes a photo and notifies the customer, which settles the "you skipped me" call before it happens.</li>
+    <li><b>Why the planner matters:</b> ETAs are only as good as the stop order. Using the routing page's order means the "12 of 34" count is real.</li>
+  </ul>
+</section>
+
+<section id="notify">
+  <h2>Notifications<small>Before, during, after</small></h2>
+  <div class="tbl"><table>
+    <thead><tr><th>When</th><th>Message</th><th>Channel</th></tr></thead>
+    <tbody>
+      <tr><td>Evening before</td><td>"Pickup tomorrow (Week B Tuesday). Cart out by 7am."</td><td>Email or push by default. Text if they opt in.</td></tr>
+      <tr><td>Truck ~15 min away</td><td>"The Quiet Route truck is about 15 minutes away." Optional, for people who roll the cart out late.</td><td>Push or text</td></tr>
+      <tr><td>After pickup</td><td>"Picked up at 9:42. Thanks!" or "Your cart wasn't out" with a photo</td><td>Push, email or text</td></tr>
+      <tr><td>Weather or breakdown</td><td>"Snow: today's route moves to tomorrow." Sent to everyone on the affected route day.</td><td>All channels</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Cost is small.</b> Texts through a provider like Twilio cost about a cent each, plus a one-time US business texting registration (roughly $20–50) and a small monthly fee (estimates; check current pricing). 1,000 customers getting two texts per pickup is about 4,300 texts a month, or <b>~$40–60</b>. Email is ~$10–15/month. Web push notifications are free. Make email or push the default and text an opt-in.</p>
+</section>
+
+<section id="billing">
+  <h2>Sign-up and billing<small>Decided: build on Stripe</small></h2>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>Hauler platforms (CurbWaste, Docket, TrashFlow, Routeware)</th><th>Build our own on Stripe</th></tr></thead>
+    <tbody>
+      <tr><td><b>Price</b></td><td>Monthly per truck. Not published, so get quotes.</td><td>Stripe fees: cards 2.9% + 30¢, bank transfer 0.8% (capped at $5), plus ~0.5–0.8% for subscription billing. Hosting ~$5–25/month.</td></tr>
+      <tr><td><b>Fits us?</b></td><td>Built mostly for dumpster and roll-off companies or large fleets. No founding-member campaign. Tracking is their own version.</td><td>Exactly our flow: address check against E911 data, zone progress, saved-card pledges, cart-size pricing, compost add-on, live tracking</td></tr>
+      <tr><td><b>Risk</b></td><td>Low to build, but we're locked into their data and pricing</td><td>We maintain it. Bugs in our code could affect billing. Card handling stays inside Stripe.</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Why build on Stripe:</b> Stripe does the hard, risky parts: storing cards, recurring charges, failed-payment retries, receipts, and a hosted page where customers update their card or cancel. We build the parts that make us different:</p>
+  <ul class="list">
+    <li><b>Sign-up that checks the address</b> against the E911 points we already downloaded. It confirms we serve the address and shows which route day they'd get.</li>
+    <li><b>Founding campaign:</b> save the card now (Stripe can store a card without charging it), show progress for each zone, and start charging when the zone launches.</li>
+    <li><b>Plans:</b> 32, 64 and 96 gal, every other week or weekly, plus compost. Holds for vacations. One-off extra pickups.</li>
+    <li><b>Operations:</b> send new customers to the routing planner, give the driver a stop list, and flag exceptions.</li>
+    <li>Ask an accountant whether Vermont charges sales tax on trash service and how to record prepayments. Connect Stripe to QuickBooks.</li>
+  </ul>
+</section>
+
+<section id="build">
+  <h2>Can we build it in-house with AI?<small>Yes, if we keep it small and keep the money inside Stripe</small></h2>
+  <p>This is a small web app: a few database tables (customers, addresses, subscriptions, route days, stops, events), Stripe's hosted pages, and a webhook for the tracker. With AI coding tools, a working first version is <b>a few weeks of part-time work</b> (estimate). The routing planner in this project is already the hardest piece.</p>
+  <ul class="list">
+    <li><b>Do:</b> use Stripe's hosted checkout and customer pages, test every billing flow in Stripe's test mode, back up the database nightly, and have logs and an admin page to fix mistakes.</li>
+    <li><b>Don't:</b> store card numbers, write our own login or password system (use a proven library or a login provider), or build billing logic Stripe already handles.</li>
+    <li><b>Stack:</b> keep the Python this project already uses (for example FastAPI with SQLite, then Postgres), hosted on a small managed server. The routing planner becomes one module of it.</li>
+  </ul>
+</section>
+
+<section id="phases">
+  <h2>Build order</h2>
+  <ol class="steps">
+    <li><b>Before launch, the campaign:</b> landing page, address check, zone map with progress bars, saved-card pledges and prepaid tiers.</li>
+    <li><b>At launch:</b> turn pledges into subscriptions, customer self-service page, route export from the planner, and a driver checklist on a phone.</li>
+    <li><b>First season:</b> tracker webhook, live map, "15 minutes away" and "picked up" notifications, and the "cart not out" photo.</li>
+    <li><b>Later:</b> compost add-on, extra-pickup orders, referral credits, and member or co-op features if we go that way.</li>
+  </ol>
+</section>
+
+<footer>Tracker options and prices are on the <a href="hardware.html#gps">Hardware page</a>. Stripe prices from Stripe's published rates as of 2026. Confirm before building.</footer>
+</main>
+</div>
+</body>
+</html>

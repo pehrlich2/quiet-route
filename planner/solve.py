@@ -24,9 +24,12 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 
 M_PER_MI = 1609.344
-# Casella transfer station, 357 Avenue C, Williston (from the E911 address point).
-WILLISTON_DUMP = (44.465370, -73.127489)
-DAY_LABELS = [f"Wk {w} {d}" for w in ("A", "B") for d in ("Mon", "Tue", "Wed", "Thu", "Fri")]
+# Williston facilities, from E911 address points.
+TRANSFER_STATION = (44.46407, -73.12804)   # Casella transfer station, 262 Avenue B (trash)
+RECYCLING_FACILITY = (44.46537, -73.12749)  # CSWD recycling facility (MRF), 357 Avenue C; Mon–Fri 6–3
+COMPOST_SITE = (44.47358, -73.08149)        # Green Mountain Compost, 1042 Redmond Rd
+WEEKDAYS = ("Mon", "Tue", "Wed", "Thu", "Fri")
+DAY_LABELS = [f"Wk {w} {d}" for w in ("A", "B") for d in WEEKDAYS]
 
 DEFAULTS = {
     "customers": 300,
@@ -36,12 +39,23 @@ DEFAULTS = {
     "assign": "town",        # "town" (days split by town) or "sweep" (pie slices around the dump)
     "service_days": 10,      # every-other-week service over two 5-day weeks
     "lbs_per_stop": 60,
-    "load_lbs": 5000,        # trailer payload per dump run
+    "load_lbs": 3500,        # trailer fills by volume: ~14.5 yd³ of loose trash at ~225–300 lb/yd³
     "stop_min": 1.5,         # minutes at each stop, including the tipper cycle
     "dump_min": 20,          # minutes at the transfer station per load
-    "yard": list(WILLISTON_DUMP),
-    "dump": list(WILLISTON_DUMP),
+    "yard": list(TRANSFER_STATION),
+    "dump": list(TRANSFER_STATION),
+    "recycle_dump": list(RECYCLING_FACILITY),
+    "compost_site": list(COMPOST_SITE),
     "solve_seconds": 2.0,    # per service day
+    # Recycling: "trash" (trash only), "alternate" (trash one week, recycling the next,
+    # same weekday, same trailer), "sameday" (both carts out the same day, two passes,
+    # same trailer), or "both" (both carts in one visit, split trailer).
+    "recycling": "sameday",
+    "recycle_lbs": 20,        # recycling per pickup; bulky but light
+    "recycle_load_lbs": 1800, # same box full of loose recycling (~100–150 lb/yd³)
+    "split_trash_pct": 60,    # split trailer: trash side; 60% balances 60 lb trash vs 20 lb recycling
+    "both_stop_factor": 1.6,  # a two-cart stop takes ~1.6x a one-cart stop
+    "mrf_min": 15,            # extra minutes per load to also tip at the recycling facility
 }
 
 
@@ -149,10 +163,12 @@ def _path(pred_row: np.ndarray, src: int, dst: int) -> list[int]:
     return out[::-1]
 
 
-def solve_day(stops: list[dict], cfg: dict) -> dict:
+def solve_day(stops: list[dict], cfg: dict, stream: str = "trash", from_dump: bool = False) -> dict:
+    """Solve one pass over `stops`. from_dump=True starts the pass at the dump (a second
+    pass on the same day, right after the first pass's last dump run)."""
     roads = load_roads()
     yard_n = snap(roads, *cfg["yard"])
-    dump_n = snap(roads, *cfg["dump"])
+    dump_n = snap(roads, *(cfg["recycle_dump"] if stream == "recycling" else cfg["dump"]))
     stop_n = [snap(roads, s["lat"], s["lon"]) for s in stops]
     # Routing nodes: 0 = yard, 1 = dump, 2.. = stops.
     gnode = [yard_n, dump_n] + stop_n
@@ -165,11 +181,21 @@ def solve_day(stops: list[dict], cfg: dict) -> dict:
     M = [[int(dist[row[gnode[a]], gnode[b]]) for b in range(n)] for a in range(n)]
     T = [[float(tdist[row[gnode[a]], gnode[b]]) for b in range(n)] for a in range(n)]
 
-    lbs = int(cfg["lbs_per_stop"])
-    cap = int(cfg["load_lbs"])
-    loads_needed = math.ceil(len(stops) * lbs / cap) if stops else 0
+    # One capacity dimension per compartment: (lbs per stop, lbs per load).
+    if stream == "recycling":
+        dims = [(int(cfg["recycle_lbs"]), int(cfg["recycle_load_lbs"]))]
+    elif stream == "both":
+        frac = cfg["split_trash_pct"] / 100
+        dims = [(int(cfg["lbs_per_stop"]), int(cfg["load_lbs"] * frac)),
+                (int(cfg["recycle_lbs"]), int(cfg["recycle_load_lbs"] * (1 - frac)))]
+    else:
+        dims = [(int(cfg["lbs_per_stop"]), int(cfg["load_lbs"]))]
+    stops_per_load = min(cap // lbs for lbs, cap in dims)
+    stop_min = cfg["stop_min"] * (cfg["both_stop_factor"] if stream == "both" else 1)
+    dump_min = cfg["dump_min"] + (cfg["mrf_min"] if stream == "both" else 0)
+    loads_needed = max(math.ceil(len(stops) * lbs / cap) for lbs, cap in dims) if stops else 0
     V = max(1, loads_needed + 1)
-    starts = [0] + [1] * (V - 1)
+    starts = [1] * V if from_dump else [0] + [1] * (V - 1)
     ends = [1] * V
     manager = pywrapcp.RoutingIndexManager(n, V, starts, ends)
     routing = pywrapcp.RoutingModel(manager)
@@ -179,9 +205,10 @@ def solve_day(stops: list[dict], cfg: dict) -> dict:
 
     arc = routing.RegisterTransitCallback(dist_cb)
     routing.SetArcCostEvaluatorOfAllVehicles(arc)
-    demand = [0, 0] + [lbs] * len(stops)
-    dem = routing.RegisterUnaryTransitCallback(lambda i: demand[manager.IndexToNode(i)])
-    routing.AddDimensionWithVehicleCapacity(dem, 0, [cap] * V, True, "Load")
+    for k, (lbs, cap) in enumerate(dims):
+        demand = [0, 0] + [lbs] * len(stops)
+        dem = routing.RegisterUnaryTransitCallback(lambda i, d=demand: d[manager.IndexToNode(i)])
+        routing.AddDimensionWithVehicleCapacity(dem, 0, [cap] * V, True, f"Load{k}")
     # An extra dump run costs time at the station; price it like ~5 km of driving.
     routing.SetFixedCostOfAllVehicles(5000)
 
@@ -218,7 +245,7 @@ def solve_day(stops: list[dict], cfg: dict) -> dict:
             coords.extend(seg if not coords else seg[1:])
         trips.append({
             "stops": [x - 2 for x in visits],
-            "lbs": len(visits) * lbs,
+            "lbs": len(visits) * sum(l for l, _ in dims),
             "meters": meters,
             "collect_meters": collect,
             "drive_s": sum(T[a][b] for a, b in legs),
@@ -227,7 +254,7 @@ def solve_day(stops: list[dict], cfg: dict) -> dict:
 
     # The solver always starts load 1 at the yard; if it left that load empty, the truck
     # still has to get from the yard to the dump before starting from there.
-    first_from_yard = manager.IndexToNode(sol.Value(routing.NextVar(routing.Start(0)))) >= 2
+    first_from_yard = from_dump or manager.IndexToNode(sol.Value(routing.NextVar(routing.Start(0)))) >= 2
     out_m = 0 if first_from_yard else M[0][1]
     out_s = 0.0 if first_from_yard else T[0][1]
     home_m = M[1][0]
@@ -235,8 +262,8 @@ def solve_day(stops: list[dict], cfg: dict) -> dict:
     home = leg_coords(1, 0)
     meters = sum(t["meters"] for t in trips) + home_m + out_m
     drive_s = sum(t["drive_s"] for t in trips) + home_s + out_s
-    service_min = len(stops) * cfg["stop_min"] + len(trips) * cfg["dump_min"]
-    return {
+    service_min = len(stops) * stop_min + len(trips) * dump_min
+    day = {
         "stops": [{"lat": s["lat"], "lon": s["lon"], "addr": s["addr"], "town": s["town"]} for s in stops],
         "trips": trips,
         "start_coords": [] if first_from_yard else leg_coords(0, 1),
@@ -244,25 +271,75 @@ def solve_day(stops: list[dict], cfg: dict) -> dict:
         "miles": meters / M_PER_MI,
         "collect_miles": sum(t["collect_meters"] for t in trips) / M_PER_MI,
         "dump_runs": len(trips),
-        "tons": len(stops) * lbs / 2000,
+        "tons": len(stops) * sum(l for l, _ in dims) / 2000,
+        "stream": stream,
+        "stops_per_load": stops_per_load,
+        "stop_min": stop_min,
+        "dump_min": dump_min,
         "drive_min": drive_s / 60,
         "service_min": service_min,
         "total_min": drive_s / 60 + service_min,
+        "home_miles": home_m / M_PER_MI,
+        "home_min": home_s / 60,
     }
+    # One entry per pass over the stops; a same-day trash + recycling day has two.
+    day["passes"] = [{k: day[k] for k in ("miles", "collect_miles", "drive_min", "dump_runs",
+                                           "stops_per_load", "stop_min", "dump_min")}]
+    return day
+
+
+def merge_passes(first: dict, second: dict) -> dict:
+    """Join two passes over the same stops into one day: the truck goes from the first
+    pass's last dump straight into the second pass instead of heading home."""
+    day = dict(second)
+    day["stream"] = "sameday"
+    day["trips"] = first["trips"] + second["trips"]
+    day["start_coords"] = first["start_coords"]
+    for k in ("collect_miles", "dump_runs", "tons", "service_min"):
+        day[k] = first[k] + second[k]
+    day["miles"] = first["miles"] - first["home_miles"] + second["miles"]
+    day["drive_min"] = first["drive_min"] - first["home_min"] + second["drive_min"]
+    day["total_min"] = first["total_min"] - first["home_min"] + second["total_min"]
+    day["passes"] = first["passes"] + second["passes"]
+    return day
 
 
 def solve(overrides: dict | None = None) -> dict:
     cfg = {**DEFAULTS, **(overrides or {})}
     customers = sample_customers(cfg)
-    groups = assign_days(customers, cfg)
     days = []
-    for i, g in enumerate(groups):
-        d = solve_day(g, cfg)
-        d["label"] = DAY_LABELS[i] if i < len(DAY_LABELS) else f"Day {i + 1}"
-        towns = sorted({s["town"] for s in g})
-        d["towns"] = towns
-        days.append(d)
-    return {"config": cfg, "customers": len(customers), "days": days}
+    if cfg["recycling"] == "alternate":
+        # Each customer keeps one weekday: trash in week A, recycling in week B.
+        groups = assign_days(customers, {**cfg, "service_days": cfg["service_days"] // 2})
+        week_b = []
+        for i, g in enumerate(groups):
+            wd = WEEKDAYS[i % len(WEEKDAYS)]
+            towns = sorted({s["town"] for s in g})
+            t = solve_day(g, cfg, "trash")
+            t.update(label=f"Wk A {wd}", towns=towns)
+            r = solve_day(g, cfg, "recycling")
+            r.update(label=f"Wk B {wd}", towns=towns)
+            days.append(t)
+            week_b.append(r)
+        days.extend(week_b)
+        visits = 2
+    elif cfg["recycling"] == "sameday":
+        # Both carts out on the same day: a trash pass, then a recycling pass from the dump.
+        for i, g in enumerate(assign_days(customers, cfg)):
+            d = merge_passes(solve_day(g, cfg, "trash"), solve_day(g, cfg, "recycling", from_dump=True))
+            d.update(label=DAY_LABELS[i] if i < len(DAY_LABELS) else f"Day {i + 1}",
+                     towns=sorted({s["town"] for s in g}))
+            days.append(d)
+        visits = 1
+    else:
+        stream = "both" if cfg["recycling"] == "both" else "trash"
+        for i, g in enumerate(assign_days(customers, cfg)):
+            d = solve_day(g, cfg, stream)
+            d.update(label=DAY_LABELS[i] if i < len(DAY_LABELS) else f"Day {i + 1}",
+                     towns=sorted({s["town"] for s in g}))
+            days.append(d)
+        visits = 1
+    return {"config": cfg, "customers": len(customers), "visits_per_customer": visits, "days": days}
 
 
 if __name__ == "__main__":
@@ -276,5 +353,5 @@ if __name__ == "__main__":
     out.write_text(json.dumps(plan, separators=(",", ":")))
     print(f"{plan['customers']} customers, {len(plan['days'])} days, solved in {time.time() - t0:.1f}s -> {out}")
     for d in plan["days"]:
-        print(f"  {d['label']:11} {', '.join(d['towns']):28} {len(d['stops']):4} stops "
+        print(f"  {d['label']:11} {d['stream']:9} {', '.join(d['towns']):28} {len(d['stops']):4} stops "
               f"{d['miles']:6.1f} mi  {d['dump_runs']} loads  {d['total_min'] / 60:4.1f} h")
