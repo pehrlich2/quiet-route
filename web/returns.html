@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/web/favicon.svg" type="image/svg+xml">
+<title>Quiet Route Returns</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<nav class="sitenav" aria-label="Site"><a class="brand" href="index.html">Quiet Route</a><a href="plan.html">Business plan</a><a href="returns.html" aria-current="page">Returns</a><a href="hardware.html">Hardware</a><a href="software.html">Software</a><a href="policies.html">Policies</a><a href="regulatory.html">Regulatory</a><a href="risks.html">Risks</a><a href="routing.html">Routing</a></nav>
+
+<main class="single">
+<header class="top">
+  <div class="eyebrow">Returns</div>
+  <h1>Return on investment</h1>
+  <p class="lede">What one pickup-and-trailer route earns on the cash it takes to launch, before and after tax. The cost model is the same one as in the business plan. Adjust customers, prices and costs there and the returns follow.</p>
+</header>
+
+<section id="returns">
+  <h2>Returns<small>What the business earns on the cash put into it</small></h2>
+  <div class="calc">
+    <div class="inputs">
+      <div class="grp">Investment</div>
+      <div class="field"><label for="txCash">Cash invested ($)</label><input id="txCash" type="number" value="80000" step="5000"><div class="hint">Down payment, carts, setup and working capital, with the equipment financed</div></div>
+      <div class="field"><label for="txReserve">Replacement set-aside ($/mo)</label><input id="txReserve" type="number" value="600" step="50"><div class="hint">Saved to replace the truck and trailer. Counted against returns, though it isn't a tax deduction.</div></div>
+      <div class="field"><label for="txEquip">Equipment cost ($)</label><input id="txEquip" type="number" value="85000" step="5000"><div class="hint">Truck, trailer, tipper: what gets depreciated</div></div>
+      <div class="grp">Illustrative owner taxes</div>
+      <div class="field wide"><label for="txStatus">Filing status</label>
+        <select id="txStatus"><option value="mfj" selected>Married filing jointly</option><option value="single">Single</option></select></div>
+      <div class="field"><label for="txWages">Owner's other income ($/yr)</label><input id="txWages" type="number" value="100000" step="10000"><div class="hint">Illustrative. Sets the tax bracket the profit lands in.</div></div>
+      <div class="field wide"><label for="txEntity">Tax structure</label>
+        <select id="txEntity"><option value="llc" selected>LLC, taxed on the owner's return</option><option value="scorp">LLC taxed as an S-corp</option></select></div>
+      <div class="field"><label for="txSalary">S-corp: owner salary ($/yr)</label><input id="txSalary" type="number" value="20000" step="5000"><div class="hint">S-corp only. A "reasonable salary" is required when the owner works in the business.</div></div>
+      <div class="field"><label for="txAdmin">S-corp: extra admin ($/yr)</label><input id="txAdmin" type="number" value="2250" step="250"><div class="hint">Payroll service, corporate tax return, Vermont minimum tax</div></div>
+      <div class="field wide"><label for="txRole">Owner's role</label>
+        <select id="txRole"><option value="active" selected>Active: 500+ hrs/yr in the business</option><option value="passive">Passive investor</option></select></div>
+      <div class="field wide"><label for="txYear">Which year</label>
+        <select id="txYear"><option value="typical" selected>A typical year</option><option value="y1">Year 1, deducting the equipment all at once</option></select></div>
+    </div>
+    <div class="outputs" aria-live="polite">
+      <div class="kpis">
+        <div class="kpi"><span>Profit / yr</span><strong id="rProfit">–</strong><em id="rCust"></em></div>
+        <div class="kpi"><span>Return before tax</span><strong id="rPre">–</strong><em id="rPrePay"></em></div>
+        <div class="kpi"><span>Return after tax</span><strong id="rPost">–</strong><em id="rPostPay"></em></div>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>Per year</th><th class="n">Amount</th></tr></thead>
+        <tbody id="rRows"></tbody>
+      </table></div>
+      <div class="grp">At other customer counts</div>
+      <div class="tbl"><table><thead><tr><th>Customers</th><th class="n">Profit</th><th class="n">Return before tax</th><th class="n">After tax</th><th class="n">Return after tax</th></tr></thead><tbody id="rScen"></tbody></table></div>
+      <p class="small">Return = (profit − replacement set-aside, then − tax for the after-tax figure) ÷ cash invested, per year. Payback = cash invested ÷ that monthly amount. After-tax figures are illustrative, using 2025 federal and 2024 Vermont rules for one example owner. They aren't tax advice.</p>
+    </div>
+  </div>
+  <h3>Notes on taxes</h3>
+  <ul class="list">
+    <li><b>Pass-through:</b> as an LLC (or S-corp), profit is taxed on the owners' personal returns at their own rates. That's why the after-tax figure depends on the owner's other income.</li>
+    <li><b>Self-employment tax:</b> an LLC owner pays it on profit. It's mostly Medicare once other wages pass the Social Security cap. An S-corp avoids it on profit beyond a reasonable salary, but adds payroll and admin costs. It usually pays off only at higher profits, or when the owner has no other wages.</li>
+    <li><b>20% small-business deduction</b> (Section 199A) applies to the profit, subject to wage limits at higher incomes. A hired driver's wages help keep it.</li>
+    <li><b>Year 1:</b> the equipment can be deducted all at once federally. Vermont doesn't follow that and uses regular 5-year depreciation.</li>
+    <li><b>Active vs passive:</b> a passive investor may also owe the 3.8% net investment income tax at higher incomes. Active owners don't on business income.</li>
+  </ul>
+</section>
+
+<section id="model">
+  <h2>Business assumptions<small>The same cost model as the business plan. Change anything and the returns below update.</small></h2>
+  <div class="calc">
+    <div class="inputs">
+      <div class="grp">Setup</div>
+      <div class="field wide"><label for="rigsel">Equipment</label>
+        <select id="rigsel">
+          <option value="sil" selected>Used Silverado EV + dump trailer + tipper</option>
+          <option value="f150">Used F-150 Lightning + dump trailer + tipper</option>
+          <option value="nrrpack">New Isuzu NRR-EV + 8–10 yd compactor (~$250k)</option>
+          <option value="nrrdump">New Isuzu NRR-EV + high-side dump body + tipper (~$205k)</option>
+          <option value="c6">New Class 6 electric garbage truck, 10–13 yd (~$300k)</option>
+          <option value="mack">New Mack LR Electric (lease)</option>
+          <option value="diesel">Used diesel garbage truck (comparison)</option>
+        </select></div>
+      <div class="field"><label for="truckpay">Equipment payment ($/mo)</label><input id="truckpay" type="number" value="1700" step="50"><div class="hint">~$85k financed at 8% over 5 years ≈ $1,700</div></div>
+      <div class="field"><label for="load">Tons per load</label><input id="load" type="number" value="1.75" step="0.25"><div class="hint">What the setup carries before a dump run. A trailer fills by volume at ~1.5–2 t.</div></div>
+      <div class="field"><label for="kwhmi">kWh per mile</label><input id="kwhmi" type="number" value="1.2" step="0.1"><div class="hint">Enter 0 for diesel (3.5 mpg at $5.00/gal)</div></div>
+      <div class="field"><label for="kwh">Electricity ($/kWh)</label><input id="kwh" type="number" value="0.19" step="0.01"></div>
+      <div class="field"><label for="miles">Route miles per day</label><input id="miles" type="number" value="40" step="5"><div class="hint">Collection only. Each Williston run adds 16 miles</div></div>
+      <div class="field"><label for="charger">Parking and charging ($/mo)</label><input id="charger" type="number" value="600" step="100"><div class="hint">Somewhere to park the trailer, plus a charger</div></div>
+
+      <div class="grp">Customers</div>
+      <div class="field"><label for="cust">Residential customers</label><input id="cust" type="number" value="400" min="0" step="50"></div>
+      <div class="field"><label for="price">Average price ($/mo)</label><input id="price" type="number" value="50" min="0" step="1"><div class="hint">Every-other-week service = 26 pickups a year</div></div>
+      <div class="field"><label for="lbs">Pounds per pickup</label><input id="lbs" type="number" value="60" min="0" step="5"></div>
+      <div class="field wide"><label for="recmode">Recycling</label>
+        <select id="recmode">
+          <option value="sameday" selected>Same day, two passes: recycling, then trash</option>
+          <option value="alternate">Alternate weeks: trash one week, recycling the next</option>
+          <option value="split">Split trailer: both carts in one visit</option>
+          <option value="none">None (trash only)</option>
+        </select></div>
+      <div class="field"><label for="reclbs">Recycling lb per pickup</label><input id="reclbs" type="number" value="20" step="5"></div>
+      <div class="field"><label for="recfee">Recycling fee ($/ton)</label><input id="recfee" type="number" value="40" step="5"><div class="hint">CSWD recycling facility. $25 in 2018, so ask for the current rate</div></div>
+      <div class="field"><label for="stops">Stops per route day</label><input id="stops" type="number" value="100" step="10"><div class="hint">Pickup and trailer ~80–110, a garbage truck 200–400+</div></div>
+
+      <div class="grp">Disposal &amp; overhead</div>
+      <div class="field"><label for="tip">Dump fee, all in ($/ton)</label><input id="tip" type="number" value="160" step="5"><div class="hint">~$125 Williston + county fee + $6 state tax</div></div>
+      <div class="field"><label for="owner">Owner salary ($/yr)</label><input id="owner" type="number" value="0" step="5000"><div class="hint">$0: the owner keeps a day job and isn't paid by the business</div></div>
+      <div class="field"><label for="crew">Hired drivers per route day</label><input id="crew" type="number" value="1" min="0" max="2" step="1"></div>
+      <div class="field"><label for="wage">Driver wage ($/hr)</label><input id="wage" type="number" value="26" step="1"><div class="hint">Paid 9 hours per route day. Payroll tax and workers' comp add 35%</div></div>
+      <div class="field"><label for="ins">Insurance ($/mo)</label><input id="ins" type="number" value="900" step="100"></div>
+      <div class="field"><label for="other">Maintenance, software, marketing ($/mo)</label><input id="other" type="number" value="1200" step="100"></div>
+    </div>
+
+    <div class="outputs" aria-live="polite">
+      <div class="kpis">
+        <div class="kpi"><span>Revenue / mo</span><strong id="oRev">–</strong></div>
+        <div class="kpi"><span>Costs / mo</span><strong id="oCost">–</strong></div>
+        <div class="kpi"><span>Profit / mo</span><strong id="oProfit">–</strong><em id="oMargin"></em></div>
+        <div class="kpi"><span>Break-even</span><strong id="oBE">–</strong><em>customers</em></div>
+      </div>
+      <div class="grp">Monthly costs</div>
+      <div class="bars" id="costBars"></div>
+      <div class="grp">Operations</div>
+      <div class="bars" id="opsBars"></div>
+      <div class="grp">At other customer counts</div>
+      <div class="tbl" style="margin-top:6px"><table id="scen"><thead><tr><th>Customers</th><th class="n">Route days / week</th><th class="n">Revenue / mo</th><th class="n">Profit / mo</th></tr></thead><tbody></tbody></table></div>
+      <p class="small">The driver is paid only on route days, at 9 hours a day. Card and billing fees are 3% of revenue. Same-day or alternate-week recycling doubles the stops. The split trailer adds ~30% to route time instead.</p>
+    </div>
+  </div>
+</section>
+</main>
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const ids=["cust","price","lbs","truckpay","load","kwhmi","kwh","miles","charger","tip","stops","owner","crew","wage","ins","other","reclbs","recfee"];
+  const VISITS = {sameday: 2, alternate: 2, split: 1.3, none: 1}; // route-day multiplier from recycling
+  const PRESETS = {
+    sil:   {truckpay:1700, load:1.75, kwhmi:1.2, miles:40, charger:600,  stops:100, ins:900,  other:1200},
+    f150:  {truckpay:1350, load:1.75, kwhmi:1.3, miles:40, charger:600,  stops:90,  ins:900,  other:1200},
+    nrrpack:{truckpay:4400, load:3.5, kwhmi:1.4, miles:40, charger:900,  stops:175, ins:1400, other:1400},
+    nrrdump:{truckpay:3600, load:4,   kwhmi:1.3, miles:40, charger:900,  stops:120, ins:1300, other:1300},
+    c6:    {truckpay:5300, load:4.5, kwhmi:2.0, miles:45, charger:2200, stops:225, ins:1800, other:1600},
+    mack:  {truckpay:9000, load:9,   kwhmi:3.0, miles:45, charger:2500, stops:250, ins:2000, other:1800},
+    diesel:{truckpay:2200, load:9,   kwhmi:0,   miles:45, charger:1200, stops:250, ins:1800, other:2200}
+  };
+  const fmt = n => (n<0?"−$":"$")+Math.round(Math.abs(n)).toLocaleString();
+  const PICKUPS = 26/12, WORKDAYS = 21.7, TIPMILES = 16;
+
+  function model(v, cust){
+    const rev = cust*v.price;
+    const stopsMo = cust*PICKUPS;
+    const rec = $("recmode").value;
+    const days = v.stops>0 ? stopsMo*VISITS[rec]/v.stops : 0;
+    const tonsDay = v.stops*v.lbs/2000;
+    const runs = v.load>0 ? Math.max(1, Math.ceil(tonsDay/v.load)) : 1;
+    const milesDay = v.miles + runs*TIPMILES;
+    const tons = stopsMo*v.lbs/2000;
+    const recTons = rec==="none" ? 0 : stopsMo*v.reclbs/2000;
+    const disposal = tons*v.tip + recTons*v.recfee;
+    const energy = v.kwhmi>0 ? days*milesDay*v.kwhmi*v.kwh : days*milesDay/3.5*5.00;
+    const crew = days*9*v.wage*1.35*v.crew;
+    const fees = rev*0.03;
+    const lines = [
+      ["Equipment payment", v.truckpay, ""],
+      ["Owner salary", v.owner/12, "b"],
+      ["Disposal", disposal, "c"],
+      ["Parking + charging", v.charger, ""],
+      ["Insurance", v.ins, "b"],
+      ["Maint./software/mktg", v.other, "b"],
+      ["Driver", crew, "b"],
+      ["Card fees", fees, "b"],
+      [v.kwhmi>0?"Electricity":"Diesel", energy, "c"]
+    ];
+    const cost = lines.reduce((a,l)=>a+l[1],0);
+    return {rev,cost,profit:rev-cost,days,tonsDay,runs,milesDay,lines,stopsMo,crew,truckpay:v.truckpay};
+  }
+  function read(){const v={};ids.forEach(k=>v[k]=parseFloat($(k).value)||0);return v;}
+  function breakeven(v){ for(let c=0;c<=6000;c+=10){ if(model(v,c).profit>=0) return c; } return null; }
+  function bar(label, pct, cls, val){
+    return `<div class="bar"><span>${label}</span><span class="track"><i class="${cls}" style="width:${Math.max(0,Math.min(pct,100)).toFixed(1)}%"></i></span><span class="n">${val}</span></div>`;
+  }
+  function render(){
+    const v=read(), m=model(v,v.cust);
+    $("oRev").textContent=fmt(m.rev);
+    $("oCost").textContent=fmt(m.cost);
+    const p=$("oProfit"); p.textContent=fmt(m.profit); p.className=m.profit>=0?"pos":"neg";
+    $("oMargin").textContent = m.rev>0 ? Math.round(m.profit/m.rev*100)+"% margin" : "";
+    const be=breakeven(v); $("oBE").textContent = be===null?"6,000+":be.toLocaleString();
+
+    const max=Math.max(...m.lines.map(l=>l[1]),1);
+    $("costBars").innerHTML = m.lines.slice().sort((a,b)=>b[1]-a[1]).map(l=>bar(l[0], l[1]/max*100, l[2], fmt(l[1]))).join("");
+
+    const cap = Math.floor(v.stops*10/VISITS[$("recmode").value]);
+    const perWeek = m.days/ (WORKDAYS/5);
+    $("opsBars").innerHTML =
+      bar("Route days", m.days/WORKDAYS*100, "", `${m.days.toFixed(1)}/mo`) +
+      bar("Customers vs capacity", cap? v.cust/cap*100:0, "b", `${v.cust.toLocaleString()} / ${cap.toLocaleString()}`) +
+      bar("Dump runs per day", m.runs/4*100, "c", `${m.runs} × ${v.load} t`) +
+      `<p class="small" style="margin:4px 0 0">${m.days.toFixed(1)} route days a month is about ${perWeek.toFixed(1)} a week out of 5. Each route day collects ${m.tonsDay.toFixed(1)} tons and drives about ${Math.round(m.milesDay)} miles, including Williston runs. Capacity assumes every-other-week service: one setup can run 10 route days per two-week cycle, shared with recycling days.</p>`;
+
+    window.QR = {model: (c) => model(read(), c), inputs: read};
+    document.dispatchEvent(new CustomEvent("qr:update"));
+    $("scen").querySelector("tbody").innerHTML=[100,200,400,700,1000].map(c=>{const s=model(v,c);
+      return `<tr><td>${c.toLocaleString()}</td><td class="n">${(s.days/(WORKDAYS/5)).toFixed(1)}</td><td class="n">${fmt(s.rev)}</td><td class="n" style="color:var(${s.profit>=0?"--good":"--bad"})">${fmt(s.profit)}</td></tr>`;}).join("");
+  }
+  $("rigsel").addEventListener("change",e=>{
+    const p=PRESETS[e.target.value]; Object.keys(p).forEach(k=>$(k).value=p[k]); render();
+  });
+  ids.forEach(k=>$(k).addEventListener("input",render));
+  $("recmode").addEventListener("change",render);
+  render();
+})();
+</script><script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  // 2025 federal and 2024 Vermont figures; planning only.
+  const FED = {
+    mfj: { std: 31500, br: [[23850, .10], [96950, .12], [206700, .22], [394600, .24], [501050, .32], [751600, .35], [Infinity, .37]], qbiThr: 394600, qbiRange: 100000, niit: 250000, addlMed: 250000 },
+    single: { std: 15750, br: [[11925, .10], [48475, .12], [103350, .22], [197300, .24], [250525, .32], [626350, .35], [Infinity, .37]], qbiThr: 197300, qbiRange: 50000, niit: 200000, addlMed: 200000 },
+  };
+  const VT = {
+    mfj: { std: 14050, ex: 10200, br: [[79950, .0335], [193300, .066], [294600, .076], [Infinity, .0875]] },
+    single: { std: 7000, ex: 5100, br: [[47900, .0335], [116000, .066], [242000, .076], [Infinity, .0875]] },
+  };
+  const SS_BASE = 176100;
+  const bracketTax = (ti, br) => { let t = 0, prev = 0; for (const [top, r] of br) { if (ti > prev) t += (Math.min(ti, top) - prev) * r; prev = top; } return t; };
+  const money = (n) => (n < 0 ? "−$" : "$") + Math.round(Math.abs(n)).toLocaleString();
+
+  // Household tax for a year. biz = business taxable income (federal), bizVT = Vermont version.
+  function household(o, biz, bizVT, wagesPaid, useLoss) {
+    const F = FED[o.status], V = VT[o.status];
+    const passive = o.role === "passive";
+    let lossLeft = useLoss ? o.loss : 0, lossUsed = 0;
+    // Passive losses offset passive business income only.
+    let bizF = biz, bizV = bizVT;
+    if (useLoss && o.lossType === "passive" && passive && bizF > 0) {
+      lossUsed = Math.min(lossLeft, bizF); bizF -= lossUsed; bizV = Math.max(0, bizV - lossUsed);
+    }
+    // A passive loss from this business is suspended, not deducted.
+    const bizAGI = passive ? Math.max(0, bizF) : bizF;
+    const bizAGIvt = passive ? Math.max(0, bizV) : bizV;
+    // Self-employment tax (sole-prop LLC only).
+    let se = 0, halfSE = 0;
+    if (o.entity === "llc" && biz > 0) {
+      const base = biz * 0.9235; // on profit before the passive loss
+      const ss = 0.124 * Math.min(base, Math.max(0, SS_BASE - o.wages));
+      const med = 0.029 * base;
+      const addl = 0.009 * (Math.max(0, o.wages + base - F.addlMed) - Math.max(0, o.wages - F.addlMed));
+      se = ss + med + addl; halfSE = (ss + med) / 2;
+    }
+    const agi = o.wages + bizAGI - halfSE;
+    // QBI deduction (20%), with the wage limit above the threshold.
+    let qbiInc = Math.max(0, bizAGI - halfSE);
+    if (useLoss && o.lossType === "qbi") { const u = Math.min(lossLeft, qbiInc); qbiInc -= u; lossUsed = u; }
+    const tiPre = Math.max(0, agi - F.std);
+    let qbi = 0.2 * qbiInc;
+    if (tiPre > F.qbiThr) {
+      const limit = Math.max(0.5 * wagesPaid, 0.25 * wagesPaid + 0.025 * o.equip);
+      const phase = Math.min(1, (tiPre - F.qbiThr) / F.qbiRange);
+      if (limit < qbi) qbi -= (qbi - limit) * phase;
+    }
+    qbi = Math.min(qbi, 0.2 * tiPre);
+    let ti = Math.max(0, tiPre - qbi);
+    // NOL: up to 80% of taxable income.
+    if (useLoss && o.lossType === "nol") { const u = Math.min(lossLeft, 0.8 * ti); ti -= u; lossUsed = u; }
+    const fed = bracketTax(ti, F.br);
+    const niit = passive ? 0.038 * Math.min(Math.max(0, bizAGI), Math.max(0, agi - F.niit)) : 0;
+    let vtTi = Math.max(0, o.wages + bizAGIvt - halfSE - V.std - V.ex);
+    if (useLoss && o.lossType === "nol") vtTi = Math.max(0, vtTi - Math.min(o.loss, 0.8 * vtTi));
+    const vt = bracketTax(vtTi, V.br);
+    return { fed, vt, se, niit, lossUsed };
+  }
+
+  function evaluate(o, m, useLoss) {
+    const profit = m.profit * 12;                     // economic profit, equipment payments included
+    const pay = m.truckpay * 12;
+    const wagesPaid = m.crew * 12 / 1.35;             // driver W-2 wages, without burden
+    const scorp = o.entity === "scorp";
+    const sal = scorp ? o.salary : 0, admin = scorp ? o.admin : 0;
+    // S-corp: salary + employer payroll tax + admin are business costs; the salary is your W-2 income.
+    const F = FED[o.status];
+    const payroll = scorp
+      ? 0.062 * sal                                            // employer Social Security (never refunded)
+        + 0.062 * Math.min(sal, Math.max(0, SS_BASE - o.wages)) // employee Social Security, only below the cap
+        + 0.029 * sal                                          // Medicare, both halves
+        + 0.009 * (Math.max(0, o.wages + sal - F.addlMed) - Math.max(0, o.wages - F.addlMed))
+      : 0;
+    const passThrough = profit - sal - 0.0765 * sal - admin;
+    let biz = scorp ? passThrough : profit, bizVT = biz;
+    if (o.year === "y1") {                            // payments aren't deductible; depreciation is
+      biz = biz + pay * 0.75 - o.equip;               // ~75% of year-1 payments are principal
+      bizVT = bizVT + pay * 0.75 - o.equip * 0.2;     // Vermont: regular 5-year depreciation
+    }
+    const base = household(o, 0, 0, 0, useLoss);
+    const withB = household({ ...o, wages: o.wages + sal }, biz, bizVT, wagesPaid + sal, useLoss);
+    // A loss used against salary alone (NOL) isn't caused by the business; only count the extra.
+    const lossUsed = Math.max(0, withB.lossUsed - base.lossUsed);
+    const d = (k) => withB[k] - base[k];
+    const tax = d("fed") + d("vt") + d("se") + d("niit") + payroll;
+    const after = profit - admin - tax - o.reserve * 12;
+    return { profit, fed: d("fed"), vt: d("vt"), se: d("se") + payroll, niit: d("niit"), admin, tax, after, lossUsed,
+      roi: o.cash > 0 ? after / o.cash : 0, payback: after > 0 ? o.cash / (after / 12) : Infinity };
+  }
+
+  
+  function read() {
+    const n = (id) => parseFloat($(id).value) || 0;
+    return { status: $("txStatus").value, wages: n("txWages"), entity: $("txEntity").value, role: $("txRole").value,
+      year: $("txYear").value, equip: n("txEquip"), salary: n("txSalary"), admin: n("txAdmin"),
+      cash: n("txCash"), reserve: n("txReserve"), lossType: "none", loss: 0 };
+  }
+  const pct = (x) => Math.round(x * 100) + "%";
+  const payback = (cash, perYear) => (perYear > 0 ? `payback ${Math.round(cash / (perYear / 12))} mo` : "no payback");
+  function figures(o, m) {
+    const r = evaluate(o, m, false);
+    const pre = r.profit - (r.admin || 0) - o.reserve * 12;
+    return { r, pre, preRoi: o.cash > 0 ? pre / o.cash : 0, post: r.after, postRoi: r.roi };
+  }
+  function render() {
+    if (!window.QR) return;
+    const o = read(), cust = window.QR.inputs().cust, f = figures(o, window.QR.model(cust)), r = f.r;
+    $("rProfit").textContent = money(r.profit);
+    $("rProfit").className = r.profit >= 0 ? "pos" : "neg";
+    $("rCust").textContent = `${cust.toLocaleString()} customers`;
+    $("rPre").textContent = pct(f.preRoi) + " / yr"; $("rPrePay").textContent = payback(o.cash, f.pre);
+    $("rPost").textContent = pct(f.postRoi) + " / yr"; $("rPostPay").textContent = payback(o.cash, f.post);
+    const row = (l, v, b) => `<tr><td>${b ? `<b>${l}</b>` : l}</td><td class="n">${b ? `<b>${money(v)}</b>` : money(v)}</td></tr>`;
+    $("rRows").innerHTML =
+      row("Profit (before tax)", r.profit) +
+      (o.entity === "scorp" ? row("S-corp admin", -r.admin) : "") +
+      row("Replacement set-aside", -o.reserve * 12) +
+      row("Cash return before tax", f.pre, true) +
+      row("Federal income tax", -r.fed) +
+      row("Vermont income tax", -r.vt) +
+      row(o.entity === "llc" ? "Self-employment / Medicare tax" : "Payroll tax on owner salary", -r.se) +
+      row("3.8% investment-income tax", -r.niit) +
+      row("Cash return after tax", f.post, true);
+    $("rScen").innerHTML = [200, 400, 600, 800].map((c) => {
+      const g = figures(o, window.QR.model(c));
+      return `<tr><td>${c}</td><td class="n">${money(g.r.profit)}</td><td class="n">${pct(g.preRoi)}</td><td class="n" style="color:var(${g.post >= 0 ? "--good" : "--bad"})">${money(g.post)}</td><td class="n">${pct(g.postRoi)}</td></tr>`;
+    }).join("");
+  }
+  ["txStatus", "txEntity", "txRole", "txYear"].forEach((id) => $(id).addEventListener("change", render));
+  ["txWages", "txEquip", "txCash", "txReserve", "txSalary", "txAdmin"].forEach((id) => $(id).addEventListener("input", render));
+  document.addEventListener("qr:update", render);
+  render();
+})();
+</script>
+</body>
+</html>
