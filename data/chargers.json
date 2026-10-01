@@ -1,0 +1,118 @@
+[
+ {
+  "name": "Tesla Supercharger",
+  "operator": "Tesla, Inc.",
+  "lat": 44.46281,
+  "lon": -73.17932,
+  "plugs": [
+   "NACS (Tesla)"
+  ],
+  "stalls": "8",
+  "kw": 150.0,
+  "street": "Dorset Street",
+  "city": "South Burlington",
+  "note": "150 kW (V2). V2 sites are usually Tesla-only."
+ },
+ {
+  "name": "Tesla Supercharger",
+  "operator": "Tesla, Inc.",
+  "lat": 44.44966,
+  "lon": -73.10896,
+  "plugs": [
+   "NACS (Tesla)"
+  ],
+  "stalls": "8",
+  "kw": 250.0,
+  "street": "Market Street",
+  "city": "Williston",
+  "note": "250 kW (V3). Open to GM and Ford with a NACS adapter."
+ },
+ {
+  "name": "Red E",
+  "operator": "Red E",
+  "lat": 44.33601,
+  "lon": -72.75049,
+  "plugs": [
+   "CCS",
+   "CHAdeMO"
+  ],
+  "stalls": null,
+  "kw": 50.0,
+  "street": "Pilgrim Park Road",
+  "city": "Waterbury",
+  "note": ""
+ },
+ {
+  "name": "EV Connect",
+  "operator": "EV Connect",
+  "lat": 44.64732,
+  "lon": -73.29789,
+  "plugs": [
+   "CHAdeMO"
+  ],
+  "stalls": "2",
+  "kw": null,
+  "street": null,
+  "city": null,
+  "note": ""
+ },
+ {
+  "name": "VIALYNK",
+  "operator": "VIALYNK",
+  "lat": 44.51734,
+  "lon": -73.18381,
+  "plugs": [
+   "CCS"
+  ],
+  "stalls": "3",
+  "kw": null,
+  "street": null,
+  "city": null,
+  "note": ""
+ },
+ {
+  "name": "ChargePoint",
+  "operator": "ChargePoint",
+  "lat": 44.42246,
+  "lon": -73.00589,
+  "plugs": [
+   "CCS",
+   "CHAdeMO"
+  ],
+  "stalls": "2",
+  "kw": 125.0,
+  "street": null,
+  "city": null,
+  "note": "Richmond, by I-89 Exit 11. 125 kW, two full stalls (confirmed by the team)."
+ },
+ {
+  "name": "Flo",
+  "operator": "Flo",
+  "lat": 44.44525,
+  "lon": -73.11457,
+  "plugs": [
+   "CCS",
+   "CHAdeMO"
+  ],
+  "stalls": "1",
+  "kw": null,
+  "street": null,
+  "city": null,
+  "note": ""
+ },
+ {
+  "name": "VIALYNK",
+  "operator": "VIALYNK",
+  "lat": 44.50688,
+  "lon": -73.08239,
+  "plugs": [
+   "CCS",
+   "CHAdeMO"
+  ],
+  "stalls": "2",
+  "kw": null,
+  "street": null,
+  "city": null,
+  "note": ""
+ }
+]

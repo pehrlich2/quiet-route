@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Quiet Route Hardware</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<nav class="sitenav" aria-label="Site"><a class="brand" href="index.html">Quiet Route</a><a href="plan.html">Business plan</a><a href="returns.html">Returns</a><a href="hardware.html" aria-current="page">Hardware</a><a href="software.html">Software</a><a href="policies.html">Policies</a><a href="regulatory.html">Regulatory</a><a href="risks.html">Risks</a><a href="routing.html">Routing</a></nav>
+
+<div class="wrap">
+<nav class="toc" aria-label="Sections">
+  <b>Hardware</b>
+  <a href="#truck">Tow vehicle</a>
+  <a href="#trailers">Two trailer sizes</a>
+  <a href="#split">Split trailer variant</a>
+  <a href="#tipper">Cart tipper</a>
+  <a href="#drawing">How it fits together</a>
+  <a href="#gps">GPS trackers</a>
+  <a href="#cameras">Cameras</a>
+  <a href="#carts">Carts</a>
+</nav>
+
+<main>
+<header class="top">
+  <div class="eyebrow">Hardware · launch setup</div>
+  <h1>Truck, trailer, tipper, carts</h1>
+  <p class="lede">The whole launch setup is off-the-shelf parts: a used electric pickup, a contractor dump trailer, a cart lifter taken from the garbage-truck world, and standard carts. The one custom job is mounting the lifter on the trailer so it can dump over a 4-foot wall.</p>
+</header>
+
+<section id="truck">
+  <h2>Tow vehicle<small>Recommended: Silverado EV. Counterpoint: F-150 Lightning.</small></h2>
+  <div class="photos">
+    <figure><img src="img/silverado-ev-rst.jpg" alt="Silver 2024 Chevrolet Silverado EV RST pickup, side view" loading="lazy">
+      <figcaption><span class="tag">Recommended</span> Chevrolet Silverado EV. Photo: Wlb5V, <a href="https://commons.wikimedia.org/wiki/File:2024_Chevrolet_Silverado_EV_RST.jpg">CC BY-SA 4.0</a>.</figcaption></figure>
+    <figure><img src="img/f150-lightning.jpg" alt="Dark gray Ford F-150 Lightning parked, front left view" loading="lazy">
+      <figcaption><span class="tag warn">Counterpoint</span> Ford F-150 Lightning. Photo: Mariordo (Mario Roberto Durán Ortiz), <a href="https://commons.wikimedia.org/wiki/File:Ford_F-150_Lightning_CRI_05_2023_3639.jpg">CC BY-SA 4.0</a>.</figcaption></figure>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>Silverado EV <span class="tag">Recommended</span></th><th>F-150 Lightning <span class="tag warn">Counterpoint</span><br><small>extended range + Max Trailer Tow</small></th></tr></thead>
+    <tbody>
+      <tr><td><b>Price, used</b></td><td>~$55–60k (2024 RST, ~28k miles)</td><td>~$35–45k (estimate; check listings)</td></tr>
+      <tr><td><b>Towing</b></td><td>10,000 lb. 2025+ Work Truck and LT with Max Tow: 12,500 lb.</td><td>10,000 lb. Standard-range trucks: 7,700 lb at most, so Trailer A only.</td></tr>
+      <tr><td><b>Payload</b></td><td>~1,300–1,500 lb</td><td>~1,500–2,200 lb depending on trim (Pro/XLT most, Platinum least)</td></tr>
+      <tr><td><b>Pulls Trailer A / B?</b></td><td>Yes / yes</td><td>Yes / yes. B loaded is ~7,600–9,100 lb with tipper and tarp.</td></tr>
+      <tr><td><b>Battery</b></td><td>~200 kWh</td><td>131 kWh</td></tr>
+      <tr><td><b>Customers per truck, winter, overnight charge only</b><br><small>both carts on the same day</small></td><td><b>~550–585</b></td><td><b>~240–355</b></td></tr>
+      <tr><td><b>…with a 45-min midday charge at Richmond (125 kW)</b></td><td>~680–800</td><td>~580–755</td></tr>
+      <tr><td><b>Power out (runs the tipper)</b></td><td>Up to 10.2 kW (GM "PowerBase")</td><td>9.6 kW (Ford "Pro Power Onboard")</td></tr>
+      <tr><td><b>Commercial license?</b></td><td>No. ~10,000 lb truck rating + 14,000 trailer ≈ 24,000.</td><td>No. ~8,300–8,600 lb + 14,000 ≈ 22,500.</td></tr>
+      <tr><td><b>Built-in tracking</b></td><td>OnStar</td><td>FordPass / Ford Pro telematics</td></tr>
+      <tr><td><b>Four-wheel steering</b></td><td>Available. Believed standard on the RST, so confirm on the window sticker.</td><td>Not offered. Ford's Pro Trailer Backup Assist (a knob that steers the trailer when reversing) is available on some trims.</td></tr>
+      <tr><td><b>Watch</b></td><td>Large RST wheels make winter tires expensive</td><td>Ford ended the fully electric Lightning in late 2025. Parts are fine for years, but resale value is weaker.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Customer limits come from the <a href="routing.html">routing planner</a> at 600–1,200 customers with 3,500 lb loads, 1.2 kWh/mile towing, a 15% reserve, and a winter setting of +35% driving energy plus 4 kW of cab heat. Weights are the manufacturers' ratings. Check the door-jamb sticker on any truck before buying.</p>
+  <h3>How to choose</h3>
+  <ul class="list">
+    <li><b>Why the Silverado:</b> its ~200 kWh battery covers a full winter route day on one overnight charge, so no daily fast-charging stop, fee or unhitching. It has four-wheel steering for tight turnarounds, and room to grow before a second truck.</li>
+    <li><b>The case for the Lightning:</b> it's ~$15–25k cheaper. With a midday charge at Richmond on most route days, it comes close to the Silverado. The cost is ~$15–20/day in public charging plus an unhitch/rehitch. Two cheap trucks later also give a backup when one is in the shop.</li>
+    <li><b>Get four-wheel steering if possible.</b> The rear wheels turn with the fronts at low speed, so the truck turns much tighter. That helps on dead-end roads, cul-de-sacs, narrow driveways and tight dump-site lanes, where a truck and trailer otherwise need a three-point turn. Test-drive it with a trailer attached: check how rear steering behaves when towing, and practice backing, since the truck pivots differently.</li>
+    <li><b>Midday charging, if needed:</b> Richmond's ChargePoint by I-89 Exit 11 has two 125 kW stalls. Charge right after a dump run, with the trailer empty (light, no smell, quick to unhitch), ~5 minutes each way with an electric tongue jack. Ask the owner before leaving a trailer in the lot.</li>
+  </ul>
+</section>
+
+<section id="trailers">
+  <h2>Two trailer sizes<small>Both are standard bumper-pull dump trailers with a 12 V hydraulic lift</small></h2>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>A · Standard: 7×12, 10,000 lb rating</th><th>B · Large: 7×14, 14,000 lb rating <span class="tag">Recommended</span></th></tr></thead>
+    <tbody>
+      <tr><td><b>Sides</b></td><td>4 ft, or 2 ft steel plus 2 ft removable extensions</td><td>4 ft steel</td></tr>
+      <tr><td><b>Empty weight</b></td><td>~2,800–3,200 lb</td><td>~3,900 lb</td></tr>
+      <tr><td><b>Volume</b></td><td>~12 cu yd</td><td>~14.5 cu yd</td></tr>
+      <tr><td><b>Trash per load</b></td><td>~1.4–1.9 tons, fills by volume</td><td>~1.6–2.2 tons, fills by volume</td></tr>
+      <tr><td><b>Stops per load</b> (60 lb each)</td><td>~45–60</td><td>~55–70</td></tr>
+      <tr><td><b>Price, new</b></td><td>~$7,500–9,500</td><td>~$9,500–10,500</td></tr>
+      <tr><td><b>Paperwork</b></td><td>Rated 10,000 lb or less: the simplest registration, and never a commercial-license question</td><td>Probably needs a USDOT number and inspection. Still no commercial license.</td></tr>
+      <tr><td><b>Examples</b></td><td>Big Tex, Sure-Trac, Load Trail 10K dumps (compare empty weights)</td><td><a href="https://www.newlinetrailer.com/product-page/2023-griffin-dump-trailer-7x14-4-sides-powder-coated-14-000lb-gvwr">Griffin 7×14 4'</a>, <a href="https://allamericantrailer.com/product/big-tex-low-profile-7x14-dump-trailer-14lp-14/">Big Tex 14LP-14-P4</a></td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Loose residential trash weighs about 225 lb per cubic yard (EPA's conversion table; 150–300 for mixed trash), maybe up to 300 once it settles in the trailer. So both trailers fill up by <b>volume</b> long before they reach the truck's weight limits. Scale tickets at Williston will give us our real number. The <a href="routing.html">routing page</a> defaults to 3,500 lb per load. Set it to what the scale tickets show. Source: <a href="https://www.epa.gov/sites/default/files/2016-04/documents/volume_to_weight_conversion_factors_memorandum_04192016_508fnl.pdf">EPA volume-to-weight conversion factors</a>.</p>
+  <h3>How to choose</h3>
+  <ul class="list">
+    <li><b>Choose A</b> if the tow vehicle is a standard-range Lightning (7,700 lb), if registration simplicity matters most, or if routes are close to Williston so extra dump runs are cheap. It weighs less empty, which helps the RST's small payload.</li>
+    <li><b>Choose B in most cases.</b> Because trash fills the box by volume first, B's extra 2 ft is about 10 more stops per load. Even full, it stays at ~7,000–8,000 lb, well inside the RST's 10,000 lb towing limit. That matters most for routes far from Williston (Hinesburg, Richmond), where each extra dump run costs 30+ miles and 45+ minutes.</li>
+    <li><b>Decide on real numbers:</b> run a month with A, weigh loads at the scale, and count dump runs. If more than about a third of route days need a third Williston run, B is worth it.</li>
+  </ul>
+</section>
+
+<section id="split">
+  <h2>Split trailer: trash and recycling in one visit<small>Future plan. A variant of Trailer B, modeled on the split-body garbage trucks Myers already runs here</small></h2>
+  <p>Split-body garbage trucks divide the body <b>lengthwise</b>, and each side is emptied separately: trash at the transfer station, recycling at the recycling facility. We can copy that on a dump trailer with three changes: a lengthwise divider, a flap on the tipper that sends each cart to the correct side, and heavier-duty barn doors so one side can be dumped while the other stays shut.</p>
+
+  <div class="diagram" role="img" aria-label="Top view of a split dump trailer. A lengthwise divider makes a 60 percent trash side on the curb side and a 40 percent recycling side on the street side. The tipper sits at the front on the curb side. Each side has its own barn door.">
+  <svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg">
+    <text x="16" y="24" class="ttl">Top view (truck to the left)</text>
+    <path d="M40,150 L100,112 M40,150 L100,188" class="steel" style="fill:none;stroke-width:4"/>
+    <rect x="62" y="136" width="30" height="28" class="accent"/>
+    <rect x="100" y="80" width="280" height="56" class="body" style="fill:var(--bar-b);opacity:.35"/>
+    <rect x="100" y="136" width="280" height="84" class="body"/>
+    <rect x="100" y="80" width="280" height="140" style="fill:none" class="steel"/>
+    <line x1="100" y1="136" x2="380" y2="136" class="accentline" style="stroke-width:3.5"/>
+    <line x1="380" y1="82" x2="404" y2="104" class="steel" style="stroke-width:3"/>
+    <line x1="380" y1="218" x2="380" y2="136" class="steel" style="stroke-width:3"/>
+    <rect x="176" y="220" width="36" height="14" class="accent"/>
+    <rect x="178" y="234" width="32" height="28" rx="3" class="cart"/>
+    <g class="lbl">
+      <text x="140" y="112">Recycling · 40% · street side</text>
+      <text x="140" y="182">Trash · 60% · curb side</text>
+      <path d="M320,136 L520,62" class="leader"/><text x="524" y="60">Divider: full length and height, welded and braced</text>
+      <path d="M404,104 L520,98" class="leader"/><text x="524" y="102">Street-side door open: dump recycling at the recycling facility</text>
+      <path d="M382,180 L520,140" class="leader"/><text x="524" y="144">Curb-side door stays shut (reinforced latch)</text>
+      <path d="M212,250 L520,192" class="leader"/><text x="524" y="196">Tipper + diverter flap, curb side, ahead of the axles</text>
+      <text x="524" y="232">Then at the transfer station: open the curb door, dump trash</text>
+    </g>
+    <g class="dim"><line x1="100" y1="290" x2="380" y2="290" class="leader"/><text x="220" y="306">14 ft</text>
+      <line x1="84" y1="80" x2="84" y2="220" class="leader"/><text x="50" y="154">7 ft</text></g>
+  </svg>
+  </div>
+
+  <div class="diagram" style="margin-top:14px" role="img" aria-label="Rear view of the split trailer. The divider sits 40 percent of the way across from the street side. With the flap down, a tipped cart empties into the curb-side trash compartment. With the flap raised into a chute, it empties over the divider into the street-side recycling compartment.">
+  <svg viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg">
+    <defs><marker id="arr4" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="hub"/></marker></defs>
+    <text x="16" y="24" class="ttl">Rear view: the diverter flap</text>
+    <line x1="16" y1="320" x2="624" y2="320" class="ground"/>
+    <rect x="150" y="190" width="56" height="80" class="body" style="fill:var(--bar-b);opacity:.35"/>
+    <rect x="206" y="190" width="84" height="80" class="body"/>
+    <rect x="150" y="190" width="140" height="80" style="fill:none" class="steel"/>
+    <line x1="206" y1="186" x2="206" y2="270" class="accentline" style="stroke-width:3.5"/>
+    <rect x="144" y="270" width="152" height="12" class="steel"/>
+    <rect x="120" y="276" width="22" height="44" rx="4" class="wheel"/><rect x="298" y="276" width="22" height="44" rx="4" class="wheel"/>
+    <line x1="312" y1="148" x2="312" y2="304" class="accentline"/>
+    <rect x="296" y="262" width="18" height="26" class="accent"/>
+    <line x1="292" y1="176" x2="250" y2="200" class="accentline" style="stroke-dasharray:5 4"/>
+    <line x1="296" y1="160" x2="176" y2="178" class="accentline"/>
+    <g transform="rotate(135 314 150)"><rect x="318" y="150" width="48" height="76" rx="4" class="ghost"/></g>
+    <path d="M232,176 Q204,178 184,204" class="path" marker-end="url(#arr4)"/>
+    <path d="M284,190 Q268,204 262,232" class="path" marker-end="url(#arr4)"/>
+    <g class="lbl">
+      <text x="340" y="118">Flap raised = chute over the divider</text>
+      <text x="340" y="134">→ recycling to the far side</text>
+      <text x="340" y="206">Flap down (dashed)</text>
+      <text x="340" y="222">→ trash to the near side</text>
+      <text x="340" y="300">Curb side →</text>
+    </g>
+    <g class="dim"><text x="152" y="306">recycling</text><text x="228" y="306">trash</text></g>
+  </svg>
+  </div>
+
+  <h3>How a load gets emptied</h3>
+  <ol class="steps">
+    <li>At the recycling facility, open only the street-side door and tip. The recycling side empties. The closed curb-side door holds the trash side.</li>
+    <li>Lower the box, close the door, and drive to Casella's transfer station, also in Williston.</li>
+    <li>Open the curb-side door and tip. Sweep the trash side before leaving.</li>
+  </ol>
+  <p class="small">Dump recycling first, while the heavier trash side keeps the load over the axles. The second stop adds ~15 minutes per load, which is built into the planner.</p>
+
+  <h3>Is it worth it? What the route planner says</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Winter, one overnight charge</th><th class="n">Trash only</th><th class="n">Alternate weeks</th><th class="n">Split trailer, both carts</th></tr></thead>
+    <tbody>
+      <tr><td>Customers per Silverado</td><td class="n">~1,100–1,150</td><td class="n">~550–750</td><td class="n"><b>~700–1,000</b></td></tr>
+      <tr><td>Customers per Lightning</td><td class="n">~580–680</td><td class="n">~400–450</td><td class="n"><b>~425–640</b></td></tr>
+      <tr><td>Miles per 2 weeks, 1,200 customers</td><td class="n">777</td><td class="n">1,319</td><td class="n">1,030</td></tr>
+      <tr><td>Dump runs per 2 weeks, 1,200 customers</td><td class="n">26</td><td class="n">38</td><td class="n">40</td></tr>
+    </tbody>
+  </table></div>
+  <p>With recycling included, the split trailer serves <b>roughly 25–35% more customers per Silverado</b> than alternate weeks. Driving between houses happens once instead of twice, which saves ~22% of the miles. Part of the gain goes to more frequent dump runs, since each side is half a box, and to the second stop at the recycling facility. The split is set 60/40 because trash is heavier per stop (60 lb versus 20 lb), so both sides fill at about the same time. Change it on the <a href="routing.html">routing page</a>.</p>
+  <p class="small">Ranges come from planner runs at 600 and 1,200 customers, scattered across the four towns. The same winter settings as the <a href="#truck">tow vehicle table</a>. Recycling is assumed at 20 lb per pickup, with a full trailer holding ~1,800 lb because it's bulky.</p>
+
+  <h3>What it takes</h3>
+  <ul class="list">
+    <li><b>Divider:</b> steel plate welded to the floor and front wall, braced, and sealed at the floor so recycling doesn't leak under. Adds ~300–400 lb.</li>
+    <li><b>Barn doors:</b> heavier hinges and a latch rated to hold one full side while tipped. That's a fabricator's call.</li>
+    <li><b>Diverter flap</b> at the top of the tipper mast: a hinged chute, moved by hand with a lever or by a small hydraulic cylinder on the tipper's pump.</li>
+    <li><b>Tarp</b> covering both sides. <b>Carts</b> in two lid colors so the driver never guesses.</li>
+    <li><b>Cost:</b> roughly <b>$3–7k</b> on top of the tipper (estimate). Ask the fabricator to quote it alongside the plain version.</li>
+  </ul>
+  <p><b>Recommendation:</b> launch with alternate weeks on a plain trailer, which is simpler and proves the routes. Build the split version as the <b>second trailer</b> once past ~300–400 customers, when the capacity gain starts to matter. The plain trailer then becomes the backup and the bulky-item trailer.</p>
+</section>
+
+<section id="tipper">
+  <h2>The cart tipper<small>No off-the-shelf trailer has one, so we have one built</small></h2>
+  <p>No bumper-pull dump trailer is sold with a cart tipper already on it. Our build draws on these existing parts:</p>
+  <ul class="list">
+    <li><b>Garbage-truck cart lifters</b>, such as the <a href="https://www.baynethinline.com/products/mobile-refuse-products/grl-1110-cart-lifter">Bayne GRL 1110 / 1115</a>. They're hydraulic, handle 32–96 gal carts, and bolt to a truck's rear hopper. They're designed to dump over a hopper edge about 4 ft high, not a 6.5 ft trailer wall.</li>
+    <li><b>Trailers with built-in tote lifters.</b> Travis Trailer's <a href="https://www.biocycle.net/food-waste-collection-trucks-and-lifts/">Organics Trailer Tote Dumper</a> is a self-loading, self-dumping trailer for food-waste totes. It proves the idea of a lifter on a trailer.</li>
+    <li><b>Stand-alone "high-dump" can dumpers</b> (for example <a href="https://www.nationwideindustrialsupply.com/departments/Hoppers/manual-electric-hydraulic-trash-can-dumpers/">Vestil</a>, and <a href="https://solusgrp.com/blog/post/the-cart-tipper-round-up-cart-lifters-and-tippers-for-all-applications.html">others</a>) empty carts into dumpsters at higher heights. Their mast and carriage are the closest match to what we need.</li>
+    <li>Used lifters come up on <a href="https://trashtrucksonline.com/category/Other-Trucks-and-Equipment/Carts-and-Tippers">Trash Trucks Online</a>.</li>
+  </ul>
+  <p><b>The build:</b> a truck-equipment or welding shop mounts a high-lift cart lifter on the <b>curb side, just ahead of the axles</b>, bolted to the frame rail and the side stake pockets. Budget ~$4–8k with a used lifter, and ask for a quote. The rear stays clear for the dump gate.</p>
+</section>
+
+<section id="drawing">
+  <h2>How it fits together<small>Drawn to scale: 1 ft = 20 px. Viewed from the curb side, with the truck heading left.</small></h2>
+
+  <div class="diagram" role="img" aria-label="Side view: Silverado EV towing a 7 by 14 dump trailer. A cord runs from the truck bed's 240 volt outlet to a hydraulic power unit on the trailer tongue. Hoses run to a cart lifter bolted to the trailer frame on the curb side near the front of the box. The lifter mast reaches about 8.5 feet, above the 6.5 foot wall top.">
+  <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg">
+    <text x="16" y="24" class="ttl">A · Side view, curb side</text>
+    <line x1="16" y1="320" x2="984" y2="320" class="ground"/>
+    <!-- truck -->
+    <path class="body" d="M40,298 L40,242 Q44,228 62,228 L150,226 L200,188 L282,186 L287,191 L287,222 L432,222 L434,298 Z"/>
+    <path class="glass" d="M160,225 L203,194 L279,193 L279,225 Z"/>
+    <line x1="235" y1="194" x2="235" y2="225" stroke="currentColor" class="leader"/>
+    <circle cx="110" cy="292" r="28" class="wheel"/><circle cx="110" cy="292" r="12" class="hub"/>
+    <circle cx="362" cy="292" r="28" class="wheel"/><circle cx="362" cy="292" r="12" class="hub"/>
+    <rect x="300" y="226" width="16" height="12" class="accent"/>
+    <!-- hitch -->
+    <rect x="432" y="284" width="22" height="7" class="steel"/>
+    <!-- trailer tongue -->
+    <path d="M452,288 L532,280" stroke="currentColor" class="steel" style="stroke-width:5"/>
+    <line x1="470" y1="286" x2="470" y2="318" class="steel" style="stroke-width:4"/>
+    <rect x="478" y="252" width="44" height="28" rx="2" class="accent"/>
+    <!-- cable truck -> tongue box -->
+    <path d="M308,226 C 360,170 440,190 486,252" class="cable"/>
+    <!-- trailer box -->
+    <rect x="532" y="270" width="280" height="12" class="steel"/>
+    <rect x="532" y="190" width="280" height="80" class="body"/>
+    <g class="leader"><line x1="572" y1="190" x2="572" y2="270"/><line x1="612" y1="190" x2="612" y2="270"/><line x1="652" y1="190" x2="652" y2="270"/><line x1="692" y1="190" x2="692" y2="270"/><line x1="732" y1="190" x2="732" y2="270"/><line x1="772" y1="190" x2="772" y2="270"/></g>
+    <rect x="808" y="190" width="8" height="80" class="steel"/>
+    <circle cx="540" cy="185" r="6" class="accent"/>
+    <!-- fenders + wheels -->
+    <path d="M672,282 Q700,258 728,282 Q752,258 780,282" class="steel" style="fill:none"/>
+    <circle cx="700" cy="298" r="22" class="wheel"/><circle cx="700" cy="298" r="9" class="hub"/>
+    <circle cx="752" cy="298" r="22" class="wheel"/><circle cx="752" cy="298" r="9" class="hub"/>
+    <!-- hoist hint -->
+    <path d="M640,282 L700,276 L640,270" class="leader" style="stroke-dasharray:3 3"/>
+    <!-- tipper: mount plate, mast, cart on carriage -->
+    <rect x="602" y="262" width="56" height="32" class="accent"/>
+    <line x1="614" y1="150" x2="614" y2="304" class="accentline"/>
+    <line x1="646" y1="150" x2="646" y2="304" class="accentline"/>
+    <line x1="614" y1="150" x2="646" y2="150" class="accentline"/>
+    <path d="M515,268 L602,268" class="accentline"/>
+    <rect x="604" y="244" width="52" height="76" rx="4" class="cart" opacity=".9"/>
+    <rect x="602" y="240" width="56" height="7" rx="2" class="cart"/>
+    <path d="M594,300 L594,160" class="path" marker-end="url(#arr)"/>
+    <defs><marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" class="hub"/></marker></defs>
+
+    <!-- labels -->
+    <g class="lbl">
+      <path d="M308,232 L308,120 L250,120" class="leader"/><text x="120" y="116">240 V outlet in bed (PowerBase)</text>
+      <path d="M400,178 L400,96" class="leader"/><text x="300" y="90">Cord to trailer (or use trailer's 12 V battery)</text>
+      <path d="M500,252 L500,70" class="leader"/><text x="420" y="64">Hydraulic pump + battery, tongue box</text>
+      <path d="M540,179 L540,44" class="leader"/><text x="548" y="40">Electric roll tarp</text>
+      <path d="M646,150 L700,114" class="leader"/><text x="704" y="110">High-lift mast, top ~8.5 ft</text>
+      <path d="M658,290 L640,350" class="leader"/><text x="560" y="366">Mount plate bolted to frame rail + stake pockets</text>
+      <path d="M534,268 L520,340" class="leader"/><text x="400" y="386">Hydraulic hoses</text>
+      <path d="M660,276 L800,338" class="leader"/><text x="804" y="344">Scissor hoist (under box)</text>
+      <path d="M816,210 L860,180" class="leader"/><text x="864" y="178">Barn doors /</text><text x="864" y="194">spreader gate</text>
+      <path d="M594,220 L740,138" class="leader"/><text x="744" y="138">Cart rides up the mast</text>
+    </g>
+    <!-- dimensions -->
+    <g class="dim">
+      <line x1="830" y1="190" x2="830" y2="270" class="leader"/><text x="836" y="236">4 ft wall</text>
+      <line x1="900" y1="190" x2="900" y2="320" class="leader"/><line x1="894" y1="190" x2="906" y2="190" class="leader"/><line x1="894" y1="320" x2="906" y2="320" class="leader"/><text x="908" y="258">6.5 ft to top</text>
+      <line x1="532" y1="336" x2="812" y2="336" class="leader"/><text x="640" y="332">14 ft box</text>
+    </g>
+  </svg>
+  </div>
+
+  <div class="diagram" style="margin-top:14px" role="img" aria-label="Rear view: the cart is latched to the lifter on the curb side, lifted up the mast above the 6.5 foot wall, then rotated over the wall so the trash falls into the box.">
+  <svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg">
+    <text x="16" y="24" class="ttl">B · Rear view: lift and tip</text>
+    <line x1="16" y1="320" x2="624" y2="320" class="ground"/>
+    <!-- box: 7 ft = 140 px -->
+    <rect x="150" y="190" width="140" height="80" class="body"/>
+    <rect x="144" y="270" width="152" height="12" class="steel"/>
+    <rect x="120" y="276" width="22" height="44" rx="4" class="wheel"/>
+    <rect x="298" y="276" width="22" height="44" rx="4" class="wheel"/>
+    <polygon points="152,268 288,268 288,246 250,236 210,242 170,236 152,248" class="trash"/>
+    <circle cx="222" cy="210" r="5" class="trash"/><circle cx="238" cy="224" r="4" class="trash"/><circle cx="210" cy="228" r="4" class="trash"/>
+    <!-- mast on curb side -->
+    <rect x="296" y="262" width="18" height="26" class="accent"/>
+    <line x1="312" y1="148" x2="312" y2="304" class="accentline"/>
+    <!-- 1: cart on ground -->
+    <rect x="318" y="244" width="48" height="76" rx="4" class="cart"/>
+    <text x="376" y="300" class="lbl">1 · Roll to lifter, latch</text>
+    <!-- 2: lifted -->
+    <rect x="318" y="150" width="48" height="76" rx="4" class="ghost"/>
+    <text x="376" y="196" class="lbl">2 · Lift up the mast</text>
+    <!-- 3: tipped over the wall, pivot at mast top -->
+    <g transform="rotate(135 314 150)"><rect x="318" y="150" width="48" height="76" rx="4" class="ghost" style="opacity:.8"/></g>
+    <path d="M372,172 A80,80 0 0 0 250,92" class="path" marker-end="url(#arr2)"/>
+    <defs><marker id="arr2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="hub"/></marker></defs>
+    <text x="376" y="118" class="lbl">3 · Rotate over the wall, empty</text>
+    <text x="376" y="134" class="lbl">(about 8–10 seconds per cycle)</text>
+    <!-- dims -->
+    <g class="dim">
+      <line x1="60" y1="190" x2="60" y2="320" class="leader"/><line x1="54" y1="190" x2="66" y2="190" class="leader"/><line x1="54" y1="320" x2="66" y2="320" class="leader"/><text x="70" y="256">6.5 ft</text>
+      <line x1="100" y1="270" x2="100" y2="320" class="leader"/><text x="104" y="300">30"</text>
+      <line x1="150" y1="340" x2="290" y2="340" class="leader"/><text x="196" y="356">7 ft inside</text>
+      <line x1="440" y1="148" x2="600" y2="148" class="leader" style="stroke-dasharray:3 3"/><text x="500" y="164">pivot ~8.5 ft</text>
+      <text x="160" y="186">Trailer A option: 2 ft steel + mesh extension</text>
+    </g>
+    <text x="376" y="344" class="lbl">Curb side →</text>
+  </svg>
+  </div>
+  <p class="small">Why the curb side: the driver works from the curb, away from traffic, and the rear stays clear for dumping. Why just ahead of the axles: the lifter (~400–700 lb) and the trash pile both sit over the axles instead of on the hitch, which keeps tongue weight inside the pickup's small payload. A pendant control or a button on the mast runs the cycle. With 240 V from the truck, the pump runs quietly, which is the point of this company.</p>
+
+  <h3>Won't the trash pile up in one spot?</h3>
+  <p>Yes. A fixed tipper drops every cart in the same place, and loose trash doesn't level itself. Left alone, the pile reaches the top of the wall under the tipper while the ends of the box are still empty. That wastes a third or more of the volume, and a pile at the front puts too much weight on the hitch. What we'll do:</p>
+  <ul class="list">
+    <li><b>Mount the tipper mid-length, just ahead of the axles</b> (as drawn). The pile starts in the middle of the box, over the axles, and has room to spread both ways.</li>
+    <li><b>Tilt the box a little every ~20 stops.</b> Raising the dump bed a few degrees with the rear doors shut lets the pile slide back and flatten. Then lower it and keep going. It takes seconds and uses the hoist the trailer already has. Test how far it can go before anything shifts against the doors.</li>
+    <li><b>A deflector plate</b> at the top of the lift (the same idea as the split trailer's flap) throws each cart's contents toward the far side or the back instead of straight down.</li>
+    <li><b>Keep a long-handled rake</b> for the corners at the end of a load, used only from the ground or a fixed step, never climbing into the box.</li>
+    <li><b>What garbage trucks do instead:</b> a hydraulic packer blade pushes each load back and compacts it. That's a compactor body, which is exactly what we're avoiding at this size. If the tilt-and-deflector approach wastes too much space, that's the signal to look at the NRR-EV compactor option.</li>
+  </ul>
+  <p class="small">Test this during the trailer trial: count stops per load with and without the tilt, and weigh loads at the Williston scale.</p>
+</section>
+
+<section id="gps">
+  <h2>GPS trackers<small>Undecided. For theft protection and for showing customers where the truck is.</small></h2>
+  <p><b>The truck already has one.</b> The Silverado EV comes with OnStar, which reports location, speed, ignition and battery level. GM's fleet service, <a href="https://www.gmfleet.com/software/onstar/onstar-vehicle-insights">OnStar Vehicle Insights</a>, puts that on a dashboard with alerts for a monthly per-vehicle fee (GM doesn't publish the price, and the first two months are free). <a href="https://www.gmenvolve.com/software/onstar/api-data-services">Getting the data out to our own software</a> goes through GM partners. It isn't built for a one-truck company writing its own app. It's good for theft recovery, but awkward for a live map on our website.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Option</th><th class="n">Hardware</th><th class="n">Monthly</th><th>How it works</th><th>Fit</th></tr></thead>
+    <tbody>
+      <tr><td><b><a href="https://www.bouncie.com/fleet">Bouncie</a></b></td><td class="n">~$77</td><td class="n">~$8–10</td><td>Plugs into the diagnostic (OBD-II) port. Built-in cellular. Updates every few seconds while driving. <a href="https://docs.bouncie.dev/">Open API with webhooks</a>.</td><td><span class="tag">Option</span> Confirm it supports the Silverado EV's port.</td></tr>
+      <tr><td><b>Teltonika tracker + Traccar</b></td><td class="n">~$60–120</td><td class="n">~$3–8 SIM</td><td>A wired-in tracker sends positions to free, self-hosted Traccar software. We own the data and the API.</td><td><span class="tag">Option</span> Most control, more setup work.</td></tr>
+      <tr><td><b>Samsara / Motive / Verizon Connect</b></td><td class="n">often bundled</td><td class="n">~$20–50</td><td>Full fleet platforms with dashcams and driver scoring. Usually 1–3 year contracts.</td><td><span class="tag">Option</span> More than we need at 1–3 vehicles</td></tr>
+      <tr><td><b>Trailer tracker</b></td><td class="n">~$30–150</td><td class="n">$0–20</td><td>A hidden battery tracker, even an AirTag. Trailers get stolen more often than trucks.</td><td><span class="tag">Option</span> Pair with a coupler lock and wheel lock</td></tr>
+    </tbody>
+  </table></div>
+  <p>How the tracker becomes a customer feature is on the <a href="software.html#tracking">Software page</a>. Prices from <a href="https://airpinpoint.com/compare/samsara-vs-motive">Airpinpoint</a> and <a href="https://spytec.com/blogs/news/fleet-tracking-pricing-comparison">Spytec</a> comparisons (fleet platforms don't publish list prices) and Bouncie's site.</p>
+</section>
+
+<section id="cameras">
+  <h2>Dashcams and route cameras<small>What haulers do, and what we need</small></h2>
+  <p>Cameras are standard on garbage trucks. Big fleets run AI dashcams (Lytx, Samsara, Motive) that record the road and the driver and upload clips of hard braking and collisions. Many also run side and rear cameras pointed at the loading area, so they can prove a cart was out or wasn't, or was overfilled or contaminated. A newer generation puts AI cameras over the hopper to spot contamination automatically. The footage settles insurance claims and "you skipped me" calls.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Camera</th><th>What it's for</th><th>Options</th><th class="n">Cost</th></tr></thead>
+    <tbody>
+      <tr><td><b>Road-facing dashcam</b></td><td>Collisions, insurance claims, backing incidents</td><td>A good consumer 2–3 channel dashcam (Viofo, Vantrue class) with GPS and a hardwired parking mode, or a fleet camera if the insurer offers a discount</td><td class="n">$150–350 consumer, or $20–40/mo fleet</td></tr>
+      <tr><td><b>Tipper camera</b></td><td>A photo or short clip of every stop: cart out or not, overfilled, what's visible on top</td><td>Weatherproof camera on the tipper mast looking at the curb and the cart. A snapshot is triggered by each tipper cycle, and the "not out" button takes one too.</td><td class="n">~$100–300 + setup</td></tr>
+      <tr><td><b>Box camera</b> (later)</td><td>What actually falls into the trailer. Catches propane tanks, bagged recyclables, batteries.</td><td>Camera looking down into the box. AI contamination detection is a later add-on.</td><td class="n">~$100–300</td></tr>
+      <tr><td><b>Cab-facing</b></td><td>Driver coaching at big fleets</td><td>Skip it while the owner is the driver. If we hire, tell drivers in writing before it's turned on.</td><td class="n">—</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Keeping footage</h3>
+  <ul class="list">
+    <li><b>Continuous recording overwrites itself</b> on the memory card, about 1–2 weeks at a time. That's normal and fine.</li>
+    <li><b>Save incidents immediately</b> (a collision, damage, a complaint) and <b>keep them until the claim is closed, plus 3 years</b>, which covers Vermont's usual deadline for injury and property claims. Never delete footage after being told about a claim.</li>
+    <li><b>Stop photos</b> (tipper camera): keep 90 days, matching the <a href="policies.html#privacy">privacy policy</a>. They're tied to the customer's pickup record in our software.</li>
+    <li><b>Turn off cab audio</b>, or post a notice. Point cameras at the road, curb and cart, not into windows or houses.</li>
+  </ul>
+  <p class="small">Neither electric pickup has a built-in continuous dashcam we could rely on, so plan for an aftermarket unit. The tipper camera is the one that pays for itself, because it turns "you skipped me" into a timestamped photo.</p>
+</section>
+
+<section id="carts">
+  <h2>Carts<small>Where to get them, what they cost, and whether they get stolen</small></h2>
+  <figure><img src="img/rehrig-cart.jpg" alt="Green Rehrig trash cart with a barcode label and a blue recycling cart at a curb" loading="lazy" style="max-width:560px">
+    <figcaption>A Rehrig cart with a barcode ID label, the kind of cart that suits a lifter. Photo: TheInvertedFan, <a href="https://commons.wikimedia.org/wiki/File:A_barcode_Rehrig...with_a_staircase_lid_-_Flickr_-_TheInvertedFan.jpg">public domain</a>.</figcaption></figure>
+  <div class="tbl"><table>
+    <thead><tr><th>Source</th><th class="n">Each</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><b>New, by the pallet:</b> <a href="https://www.toter.com/products/waste-haulers/curbside-collection-trash-carts">Toter</a>, Rehrig Pacific, <a href="https://www.cascadeng.com/products/carts-containers/residential/96-gallon/">Cascade Engineering</a>, Otto</td><td class="n">~$55–85</td><td>Order hot-stamped with our logo and a serial number. RFID tags are optional. 4–8 weeks lead time plus freight. Toter quotes a 15–20+ year life.</td></tr>
+      <tr><td><b>Used or refurbished</b></td><td class="n">~$15–40</td><td>From towns switching vendors, cart refurbishers, or Marketplace. Check lids, wheels and the lifting lip. Mixed brands all fit a standard lifter.</td></tr>
+      <tr><td><b>Customer's own cart</b></td><td class="n">$0</td><td>Only if it has the standard lifting lip. Most home-center carts don't.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Do they get stolen?</h3>
+  <p>Sometimes, but mostly they go missing in other ways: borrowed by neighbors, crushed by plows, knocked over by bears, or left behind when someone moves. We didn't find a published industry loss rate. <b>Budget 2–3% replacement a year</b> (estimate). Serial numbers (and RFID later) tie each cart to an address. Charge a replacement fee for damage the customer causes. Use bear-resistant latching lids for customers in bear areas; that's a real issue in Jericho, Richmond and Hinesburg.</p>
+</section>
+
+<footer>
+  Photos from Wikimedia Commons under the licenses noted. Diagrams are original concept drawings, not engineering drawings. Get a fabricator to check mounting loads.
+</footer>
+</main>
+</div>
+</body>
+</html>
